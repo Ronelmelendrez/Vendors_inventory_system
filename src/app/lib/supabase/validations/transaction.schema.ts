@@ -6,7 +6,7 @@ export const transactionSchema = z.object({
   date_time: z.string().min(1, "Date and time are required"),
 
   transaction_type: z.enum(["Sale", "Return", "Inventory Count"], {
-    required_error: "Please select a transaction type",
+    message: "Please select a transaction type",
   }),
 
   quantity: z
