@@ -1,46 +1,31 @@
 ﻿"use client";
 
-import {
-  Header,
-  StatsGrid,
-  QuickActions,
-  WelcomeSection,
-} from "@/components/dashboard";
-import { ProductsTable, AddProductModal } from "@/components/products";
-import { useProducts } from "@/hooks/useProducts";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Home() {
-  const {
-    products,
-    isModalOpen,
-    formData,
-    totalSales,
-    setIsModalOpen,
-    handleInputChange,
-    handleAddProduct,
-  } = useProducts();
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        router.push("/auth/login");
+      } else if (user.role === "admin") {
+        router.push("/admin");
+      } else if (user.role === "branch") {
+        router.push("/branch");
+      }
+    }
+  }, [user, loading, router]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <StatsGrid totalProducts={products.length} totalSales={totalSales} />
-
-        <QuickActions onAddProduct={() => setIsModalOpen(true)} />
-
-        <ProductsTable products={products} />
-
-        <WelcomeSection />
-      </main>
-
-      <AddProductModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        formData={formData}
-        onInputChange={handleInputChange}
-        onSubmit={handleAddProduct}
-      />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="mt-4 text-gray-600">Redirecting...</p>
+      </div>
     </div>
   );
 }

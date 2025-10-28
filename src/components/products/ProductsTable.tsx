@@ -8,7 +8,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
   if (products.length === 0) return null;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
+    <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">
         Added Products
       </h2>

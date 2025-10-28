@@ -8,7 +8,7 @@ interface StatsGridProps {
 
 export function StatsGrid({ totalProducts, totalSales }: StatsGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
       <StatCard
         title="Total Products"
         value={totalProducts.toString()}
