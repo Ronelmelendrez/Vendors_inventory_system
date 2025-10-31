@@ -4,18 +4,8 @@ import { useState } from "react";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Header } from "@/components/dashboard";
 import { useAuth } from "@/contexts/AuthContext";
+import { useProductsContext } from "@/contexts/ProductsContext";
 import { ShoppingCart, Plus, Minus, Trash2, DollarSign } from "lucide-react";
-import { PRODUCT_CATEGORIES } from "@/types/product";
-
-// Mock available products (in real app, these would come from admin)
-const AVAILABLE_PRODUCTS = [
-  { id: "1", name: "Laptop Dell XPS", price: 1299.99, category: "Electronics" },
-  { id: "2", name: "Wireless Mouse", price: 29.99, category: "Electronics" },
-  { id: "3", name: "Office Chair", price: 199.99, category: "Furniture" },
-  { id: "4", name: "Desk Lamp", price: 39.99, category: "Furniture" },
-  { id: "5", name: "Notebook Pack", price: 12.99, category: "Stationery" },
-  { id: "6", name: "Pen Set", price: 8.99, category: "Stationery" },
-];
 
 interface CartItem {
   id: string;
@@ -27,11 +17,20 @@ interface CartItem {
 
 function BranchDashboard() {
   const { user } = useAuth();
+  const { products } = useProductsContext();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [customerName, setCustomerName] = useState("");
+  const [cashReceived, setCashReceived] = useState("");
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
 
-  const filteredProducts = AVAILABLE_PRODUCTS.filter((product) => {
+  // Get unique categories from products
+  const categories = Array.from(
+    new Set(products.map((p) => p.category))
+  ).filter(Boolean);
+
+  const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -40,7 +39,12 @@ function BranchDashboard() {
     return matchesSearch && matchesCategory;
   });
 
-  const addToCart = (product: typeof AVAILABLE_PRODUCTS[0]) => {
+  const addToCart = (product: {
+    id: string;
+    name: string;
+    price: number;
+    category: string;
+  }) => {
     const existingItem = cart.find((item) => item.id === product.id);
     if (existingItem) {
       setCart(
@@ -71,6 +75,9 @@ function BranchDashboard() {
 
   const clearCart = () => {
     setCart([]);
+    setCustomerName("");
+    setCashReceived("");
+    setShowCheckoutForm(false);
   };
 
   const subtotal = cart.reduce(
@@ -79,11 +86,26 @@ function BranchDashboard() {
   );
   const tax = subtotal * 0.1; // 10% tax
   const total = subtotal + tax;
+  const cashAmount = parseFloat(cashReceived) || 0;
+  const change = cashAmount - total;
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
+    if (!customerName.trim()) {
+      alert("Please enter customer name");
+      return;
+    }
+    if (cashAmount < total) {
+      alert("Cash received is less than total amount!");
+      return;
+    }
+
     alert(
-      `Purchase recorded!\nTotal: $${total.toFixed(2)}\nItems: ${cart.length}`
+      `Purchase Completed!\n\nCustomer: ${customerName}\nTotal: $${total.toFixed(
+        2
+      )}\nCash: $${cashAmount.toFixed(2)}\nChange: $${change.toFixed(
+        2
+      )}\nItems: ${cart.length}`
     );
     clearCart();
   };
@@ -127,7 +149,7 @@ function BranchDashboard() {
                   >
                     All
                   </button>
-                  {["Electronics", "Furniture", "Stationery"].map((cat) => (
+                  {categories.map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
@@ -177,7 +199,16 @@ function BranchDashboard() {
 
             {filteredProducts.length === 0 && (
               <div className="bg-white rounded-lg shadow-sm border p-8 text-center">
-                <p className="text-gray-500">No products found</p>
+                {products.length === 0 ? (
+                  <div>
+                    <p className="text-gray-500 mb-2">No products available</p>
+                    <p className="text-sm text-gray-400">
+                      Admin needs to add products first
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-gray-500">No products found</p>
+                )}
               </div>
             )}
           </div>
@@ -191,9 +222,7 @@ function BranchDashboard() {
               </h3>
 
               {cart.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">
-                  Cart is empty
-                </p>
+                <p className="text-gray-500 text-center py-8">Cart is empty</p>
               ) : (
                 <>
                   <div className="space-y-3 mb-4 max-h-96 overflow-y-auto">
@@ -255,10 +284,61 @@ function BranchDashboard() {
                     </div>
                     <div className="flex justify-between text-lg font-bold border-t pt-2">
                       <span>Total:</span>
-                      <span className="text-blue-600">
-                        ${total.toFixed(2)}
-                      </span>
+                      <span className="text-blue-600">${total.toFixed(2)}</span>
                     </div>
+                  </div>
+
+                  {/* Checkout Form */}
+                  <div className="mt-4 border-t pt-4 space-y-3">
+                    <div>
+                      <label className="block text-sm font-bold text-gray-900 mb-1">
+                        Customer Name *
+                      </label>
+                      <input
+                        type="text"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        className="w-full px-3 py-3 text-gray-900 font-medium bg-white border-2 border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-600"
+                        placeholder="Enter customer name"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-bold text-gray-900 mb-1">
+                        Cash Received *
+                      </label>
+                      <input
+                        type="number"
+                        value={cashReceived}
+                        onChange={(e) => setCashReceived(e.target.value)}
+                        step="0.01"
+                        min="0"
+                        className="w-full px-3 py-3 text-gray-900 font-medium bg-white border-2 border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-600"
+                        placeholder="0.00"
+                      />
+                    </div>
+
+                    {cashReceived && cashAmount >= total && (
+                      <div className="bg-green-50 border-2 border-green-500 rounded-lg p-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm font-bold text-green-900">
+                            Change:
+                          </span>
+                          <span className="text-2xl font-bold text-green-600">
+                            ${change.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
+                    {cashReceived && cashAmount < total && (
+                      <div className="bg-red-50 border-2 border-red-500 rounded-lg p-3">
+                        <p className="text-sm font-bold text-red-900 text-center">
+                          Insufficient cash! Need $
+                          {(total - cashAmount).toFixed(2)} more
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   <div className="mt-4 space-y-2">
