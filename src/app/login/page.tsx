@@ -23,7 +23,9 @@ export default function LoginPage() {
       // Redirect will happen automatically via AuthContext
       router.push("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Invalid email or password");
+      setError(
+        err instanceof Error ? err.message : "Invalid email or password"
+      );
     } finally {
       setLoading(false);
     }
@@ -37,7 +39,9 @@ export default function LoginPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
             <LogIn className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900">Vendor Management</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Vendor Management
+          </h1>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
         </div>
 
@@ -51,7 +55,10 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Email Address
               </label>
               <input
@@ -66,7 +73,10 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Password
               </label>
               <input
@@ -91,7 +101,9 @@ export default function LoginPage() {
 
           {/* Demo Credentials */}
           <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-sm font-medium text-gray-700 mb-3">Demo Accounts:</p>
+            <p className="text-sm font-medium text-gray-700 mb-3">
+              Demo Accounts:
+            </p>
             <div className="space-y-2 text-sm">
               <div className="bg-gray-50 p-3 rounded">
                 <p className="font-medium text-gray-900">Admin Account</p>

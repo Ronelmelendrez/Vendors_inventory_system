@@ -24,3 +24,29 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Make placeholder text black for better visibility */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #000000;
+  opacity: 0.6;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #000000;
+  opacity: 0.6;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #000000;
+  opacity: 0.6;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #000000;
+  opacity: 0.6;
+}
