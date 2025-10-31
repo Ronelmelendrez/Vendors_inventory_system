@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.push("/auth/login");
+        router.push("/login");
       } else if (user.role === "admin") {
         router.push("/admin");
       } else if (user.role === "branch") {

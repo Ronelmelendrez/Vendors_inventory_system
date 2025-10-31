@@ -20,7 +20,7 @@ export function ProtectedRoute({
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.push("/auth/login");
+        router.push("/login");
       } else if (allowedRoles && !allowedRoles.includes(user.role)) {
         // Redirect to appropriate dashboard
         if (user.role === "admin") {

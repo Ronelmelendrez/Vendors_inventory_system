@@ -1,8 +1,6 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { User as SupabaseUser } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client";
 import { User, UserRole } from "@/types/auth";
 
 interface AuthContextType {
@@ -16,93 +14,64 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Mock users for demo/frontend-only mode
+const MOCK_USERS = [
+  {
+    id: "admin-001",
+    email: "admin@vendor.com",
+    password: "admin123",
+    role: "admin" as UserRole,
+    branch_name: undefined,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: "branch-001",
+    email: "branch@vendor.com",
+    password: "branch123",
+    role: "branch" as UserRole,
+    branch_name: "Main Branch",
+    created_at: new Date().toISOString(),
+  },
+];
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const supabase = createClient();
 
   useEffect(() => {
-    // Check active sessions
-    const checkUser = async () => {
+    // Check for stored session on mount
+    const storedUser = localStorage.getItem("auth_user");
+    if (storedUser) {
       try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-
-        if (session?.user) {
-          await fetchUserProfile(session.user);
-        }
+        setUser(JSON.parse(storedUser));
       } catch (error) {
-        console.error("Error checking user:", error);
-      } finally {
-        setLoading(false);
+        console.error("Error parsing stored user:", error);
+        localStorage.removeItem("auth_user");
       }
-    };
-
-    checkUser();
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event: any, session: any) => {
-      if (session?.user) {
-        await fetchUserProfile(session.user);
-      } else {
-        setUser(null);
-      }
-      setLoading(false);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
+    }
+    setLoading(false);
   }, []);
 
-  const fetchUserProfile = async (authUser: SupabaseUser) => {
-    try {
-      const { data, error } = await supabase
-        .from("user_profiles")
-        .select("*")
-        .eq("id", authUser.id)
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        const userData = data as {
-          id: string;
-          email: string;
-          role: UserRole;
-          branch_name: string | null;
-          created_at: string;
-        };
-
-        setUser({
-          id: userData.id,
-          email: userData.email,
-          role: userData.role,
-          branch_name: userData.branch_name || undefined,
-          created_at: userData.created_at,
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching user profile:", error);
-    }
-  };
-
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    // Simulate network delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    if (error) throw error;
+    const mockUser = MOCK_USERS.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (!mockUser) {
+      throw new Error("Invalid email or password");
+    }
+
+    const { password: _, ...userWithoutPassword } = mockUser;
+    setUser(userWithoutPassword);
+    localStorage.setItem("auth_user", JSON.stringify(userWithoutPassword));
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
     setUser(null);
+    localStorage.removeItem("auth_user");
   };
 
   const value = {
