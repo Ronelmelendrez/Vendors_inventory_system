@@ -154,14 +154,14 @@ export default function LandingPage() {
               <div className="space-y-4">
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <CheckCircle className="h-6 w-6 text-green-500 shrink-0" />
                     <span className="text-gray-700 text-lg">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 text-white">
+            <div className="bg-linear-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 text-white">
               <h3 className="text-3xl font-bold mb-6">Ready to get started?</h3>
               <p className="text-blue-100 mb-8 text-lg">
                 Join us today and streamline your vendor management operations.
