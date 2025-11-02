@@ -1,4 +1,4 @@
-import { Package, LogOut, User } from "lucide-react";
+import { Package, LogOut, User, Settings } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
@@ -27,6 +27,12 @@ export function Header() {
     } catch (error) {
       console.error("Error signing out:", error);
     }
+  };
+
+  const handleSettings = () => {
+    setIsMenuOpen(false);
+    // Add settings navigation or modal here
+    console.log("Settings clicked");
   };
 
   return (
@@ -72,6 +78,13 @@ export function Header() {
                       </p>
                     </div>
                   </div>
+                  <button
+                    onClick={handleSettings}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                  >
+                    <Settings className="h-4 w-4" />
+                    <span>Settings</span>
+                  </button>
                   <button
                     onClick={handleSignOut}
                     className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
