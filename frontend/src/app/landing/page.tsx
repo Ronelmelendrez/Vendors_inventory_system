@@ -123,7 +123,7 @@ export default function LandingPage() {
               return (
                 <div
                   key={index}
-                  className="p-6 rounded-xl border-2 border-gray-100 hover:border-blue-500 hover:shadow-lg transition-all"
+                  className="p-6 rounded-xl border-2 border-gray-100 hover:border-blue-500 hover:shadow-lg transition-all hover:-translate-y-1 duration-300"
                 >
                   <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-blue-600" />
