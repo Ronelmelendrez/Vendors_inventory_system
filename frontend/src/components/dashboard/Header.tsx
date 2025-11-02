@@ -1,4 +1,4 @@
-import { Package, LogOut, User } from "lucide-react";
+import { Package, LogOut, User, Upload } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
@@ -7,6 +7,7 @@ export function Header() {
   const { user, signOut } = useAuth();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,6 +27,21 @@ export function Header() {
       router.push("/auth/login");
     } catch (error) {
       console.error("Error signing out:", error);
+    }
+  };
+
+  const handleAddAvatar = () => {
+    setIsMenuOpen(false);
+    setShowAvatarModal(true);
+  };
+
+  const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Handle avatar upload here
+      console.log("Avatar file:", file);
+      // You can add logic to upload to storage or convert to base64
+      setShowAvatarModal(false);
     }
   };
 
@@ -68,6 +84,13 @@ export function Header() {
                     </p>
                   </div>
                   <button
+                    onClick={handleAddAvatar}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  >
+                    <Upload className="h-4 w-4" />
+                    <span>Add Avatar</span>
+                  </button>
+                  <button
                     onClick={handleSignOut}
                     className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
                   >
@@ -80,6 +103,44 @@ export function Header() {
           )}
         </div>
       </div>
+
+      {/* Avatar Upload Modal */}
+      {showAvatarModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              Upload Avatar
+            </h2>
+            <div className="space-y-4">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors">
+                <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <label className="cursor-pointer">
+                  <span className="text-blue-600 hover:text-blue-700 font-medium">
+                    Choose a file
+                  </span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarUpload}
+                    className="hidden"
+                  />
+                </label>
+                <p className="text-sm text-gray-500 mt-2">
+                  PNG, JPG or GIF (max. 5MB)
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowAvatarModal(false)}
+                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
