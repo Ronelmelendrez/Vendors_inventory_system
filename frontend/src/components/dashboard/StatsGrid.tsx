@@ -7,6 +7,10 @@ interface StatsGridProps {
 }
 
 export function StatsGrid({ totalProducts, totalSales }: StatsGridProps) {
+  // Calculate additional metrics
+  const averageSale = totalSales / Math.max(totalProducts, 1);
+  const growthRate = 15.5; // Mock growth rate
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
       <StatCard
@@ -22,14 +26,14 @@ export function StatsGrid({ totalProducts, totalSales }: StatsGridProps) {
         bgColor="bg-green-50"
       />
       <StatCard
-        title="Transactions"
-        value={totalProducts.toString()}
+        title="Average Sale"
+        value={`$${averageSale.toFixed(2)}`}
         icon={<ShoppingCart className="h-6 w-6 text-purple-600" />}
         bgColor="bg-purple-50"
       />
       <StatCard
-        title="Inventory Value"
-        value={`$${totalSales.toFixed(2)}`}
+        title="Growth Rate"
+        value={`${growthRate}%`}
         icon={<TrendingUp className="h-6 w-6 text-orange-600" />}
         bgColor="bg-orange-50"
       />
