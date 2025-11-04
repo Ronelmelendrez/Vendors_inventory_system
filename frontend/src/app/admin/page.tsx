@@ -7,6 +7,12 @@ import {
   QuickActions,
   MobileQuickActions,
   WelcomeSection,
+  MetricsGrid,
+  ActivityFeed,
+  TopProducts,
+  SalesChart,
+  LowStockAlerts,
+  SalesCalendar,
 } from "@/components/dashboard";
 import { ProductsTable, AddProductModal } from "@/components/products";
 import { useProducts } from "@/hooks/useProducts";
@@ -51,6 +57,12 @@ function AdminDashboard() {
 
           {/* Main Content */}
           <main className="flex-1 min-w-0">
+            {/* Metrics Overview */}
+            <MetricsGrid
+              totalProducts={products.length}
+              totalSales={totalSales}
+            />
+
             <StatsGrid
               totalProducts={products.length}
               totalSales={totalSales}
