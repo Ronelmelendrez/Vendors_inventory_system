@@ -3,7 +3,6 @@ import {
   ShoppingCart,
   Users,
   DollarSign,
-  TrendingUp,
   Boxes,
 } from "lucide-react";
 import { QuickStat } from "./QuickStat";
@@ -22,7 +21,7 @@ export function MetricsGrid({
   totalRevenue = 87450,
 }: MetricsGridProps) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
       <QuickStat
         label="Total Products"
         value={totalProducts}
@@ -50,13 +49,6 @@ export function MetricsGrid({
         icon={DollarSign}
         color="bg-green-600"
         trend={{ value: 15, isPositive: true }}
-      />
-      <QuickStat
-        label="Growth"
-        value="23%"
-        icon={TrendingUp}
-        color="bg-orange-600"
-        trend={{ value: 3, isPositive: true }}
       />
       <QuickStat
         label="Low Stock"
