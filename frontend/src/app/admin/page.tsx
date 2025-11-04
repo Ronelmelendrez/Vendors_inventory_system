@@ -15,7 +15,9 @@ import {
   SalesCalendar,
 } from "@/components/dashboard";
 import { ProductsTable, AddProductModal } from "@/components/products";
+import { RecordSaleModal } from "@/components/sales";
 import { useProducts } from "@/hooks/useProducts";
+import { useSales } from "@/hooks/useSales";
 import { useAuth } from "@/contexts/AuthContext";
 
 function AdminDashboard() {
@@ -30,6 +32,16 @@ function AdminDashboard() {
     handleEditProduct,
     handleDeleteProduct,
   } = useProducts();
+
+  const {
+    sales,
+    isSaleModalOpen,
+    saleFormData,
+    totalSalesRevenue,
+    setIsSaleModalOpen,
+    handleSaleInputChange,
+    handleRecordSale,
+  } = useSales();
 
   const { user } = useAuth();
 
@@ -47,12 +59,18 @@ function AdminDashboard() {
         </div>
 
         {/* Mobile Quick Actions */}
-        <MobileQuickActions onAddProduct={() => setIsModalOpen(true)} />
+        <MobileQuickActions 
+          onAddProduct={() => setIsModalOpen(true)}
+          onRecordSale={() => setIsSaleModalOpen(true)}
+        />
 
         <div className="flex gap-6">
           {/* Sidebar */}
           <div className="w-64 shrink-0 hidden lg:block">
-            <QuickActions onAddProduct={() => setIsModalOpen(true)} />
+            <QuickActions 
+              onAddProduct={() => setIsModalOpen(true)}
+              onRecordSale={() => setIsSaleModalOpen(true)}
+            />
           </div>
 
           {/* Main Content */}
@@ -71,8 +89,8 @@ function AdminDashboard() {
 
             {/* Products Table */}
             <div className="mb-6">
-              <ProductsTable 
-                products={products} 
+              <ProductsTable
+                products={products}
                 onEdit={handleEditProduct}
                 onDelete={handleDeleteProduct}
               />
@@ -106,6 +124,15 @@ function AdminDashboard() {
         formData={formData}
         onInputChange={handleInputChange}
         onSubmit={handleAddProduct}
+      />
+
+      <RecordSaleModal
+        isOpen={isSaleModalOpen}
+        onClose={() => setIsSaleModalOpen(false)}
+        products={products}
+        formData={saleFormData}
+        onInputChange={handleSaleInputChange}
+        onSubmit={(e) => handleRecordSale(e, products)}
       />
     </div>
   );
