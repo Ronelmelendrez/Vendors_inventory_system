@@ -12,7 +12,7 @@ const defaultData = [
 ];
 
 export function SalesChart({ data = defaultData }: SalesChartProps) {
-  const maxSales = Math.max(...data.map(d => d.sales));
+  const maxSales = Math.max(...data.map((d) => d.sales));
 
   return (
     <div className="bg-white rounded-lg border-2 border-gray-100 p-6">
@@ -23,8 +23,12 @@ export function SalesChart({ data = defaultData }: SalesChartProps) {
           return (
             <div key={index}>
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">{item.month}</span>
-                <span className="text-sm font-bold text-gray-900">${item.sales.toLocaleString()}</span>
+                <span className="text-sm font-medium text-gray-700">
+                  {item.month}
+                </span>
+                <span className="text-sm font-bold text-gray-900">
+                  ${item.sales.toLocaleString()}
+                </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div

@@ -38,9 +38,7 @@ function AdminDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Message for Admin */}
         <div className="mb-6 bg-linear-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg border p-6">
-          <h2 className="text-xl font-bold text-white">
-            Welcome, Admin! 👋
-          </h2>
+          <h2 className="text-xl font-bold text-white">Welcome, Admin! 👋</h2>
           <p className="text-sm text-blue-100 mt-1">
             You have full access to all products from all branches.
           </p>

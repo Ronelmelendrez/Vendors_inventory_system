@@ -47,32 +47,45 @@ const defaultActivities: RecentActivity[] = [
   },
 ];
 
-export function ActivityFeed({ activities = defaultActivities }: ActivityFeedProps) {
+export function ActivityFeed({
+  activities = defaultActivities,
+}: ActivityFeedProps) {
   return (
     <div className="bg-white rounded-lg border-2 border-gray-100 p-6">
       <h3 className="text-lg font-bold text-gray-900 mb-4">Recent Activity</h3>
       <div className="space-y-4">
         {activities.map((activity) => (
-          <div key={activity.id} className="flex items-start gap-3 pb-4 border-b border-gray-100 last:border-0 last:pb-0">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-              activity.type === 'sale' ? 'bg-green-100' :
-              activity.type === 'stock' ? 'bg-orange-100' :
-              'bg-blue-100'
-            }`}>
-              {activity.type === 'sale' ? (
+          <div
+            key={activity.id}
+            className="flex items-start gap-3 pb-4 border-b border-gray-100 last:border-0 last:pb-0"
+          >
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                activity.type === "sale"
+                  ? "bg-green-100"
+                  : activity.type === "stock"
+                  ? "bg-orange-100"
+                  : "bg-blue-100"
+              }`}
+            >
+              {activity.type === "sale" ? (
                 <TrendingUp className="h-4 w-4 text-green-600" />
-              ) : activity.type === 'stock' ? (
+              ) : activity.type === "stock" ? (
                 <TrendingDown className="h-4 w-4 text-orange-600" />
               ) : (
                 <span className="text-blue-600 text-xs font-bold">U</span>
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900">{activity.message}</p>
+              <p className="text-sm font-medium text-gray-900">
+                {activity.message}
+              </p>
               <div className="flex items-center justify-between mt-1">
                 <p className="text-xs text-gray-500">{activity.timestamp}</p>
                 {activity.amount && (
-                  <p className="text-sm font-semibold text-green-600">${activity.amount}</p>
+                  <p className="text-sm font-semibold text-green-600">
+                    ${activity.amount}
+                  </p>
                 )}
               </div>
             </div>

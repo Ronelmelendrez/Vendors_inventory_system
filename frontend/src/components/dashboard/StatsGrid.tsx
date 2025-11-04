@@ -1,4 +1,4 @@
-import { Package, ShoppingCart, TrendingUp, DollarSign } from "lucide-react";
+import { Package, ShoppingCart, DollarSign } from "lucide-react";
 import { StatCard } from "@/components/ui/StatCard";
 
 interface StatsGridProps {
@@ -9,10 +9,9 @@ interface StatsGridProps {
 export function StatsGrid({ totalProducts, totalSales }: StatsGridProps) {
   // Calculate additional metrics
   const averageSale = totalSales / Math.max(totalProducts, 1);
-  const growthRate = 15.5; // Mock growth rate
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
       <StatCard
         title="Total Products"
         value={totalProducts.toString()}
@@ -30,12 +29,6 @@ export function StatsGrid({ totalProducts, totalSales }: StatsGridProps) {
         value={`$${averageSale.toFixed(2)}`}
         icon={<ShoppingCart className="h-6 w-6 text-purple-600" />}
         bgColor="bg-purple-50"
-      />
-      <StatCard
-        title="Growth Rate"
-        value={`${growthRate}%`}
-        icon={<TrendingUp className="h-6 w-6 text-orange-600" />}
-        bgColor="bg-orange-50"
       />
     </div>
   );
