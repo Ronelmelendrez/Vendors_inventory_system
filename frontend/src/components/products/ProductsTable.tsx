@@ -1,12 +1,17 @@
 import { Product } from "@/types/product";
-import { Edit } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 
 interface ProductsTableProps {
   products: Product[];
   onEdit?: (product: Product) => void;
+  onDelete?: (product: Product) => void;
 }
 
-export function ProductsTable({ products, onEdit }: ProductsTableProps) {
+export function ProductsTable({
+  products,
+  onEdit,
+  onDelete,
+}: ProductsTableProps) {
   if (products.length === 0) return null;
 
   return (
@@ -33,7 +38,7 @@ export function ProductsTable({ products, onEdit }: ProductsTableProps) {
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                 Category
               </th>
-              {onEdit && (
+              {(onEdit || onDelete) && (
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                   Actions
                 </th>
@@ -58,16 +63,30 @@ export function ProductsTable({ products, onEdit }: ProductsTableProps) {
                 <td className="px-4 py-3 text-sm text-gray-900">
                   {product.category}
                 </td>
-                {onEdit && (
+                {(onEdit || onDelete) && (
                   <td className="px-4 py-3 text-sm">
-                    <button
-                      onClick={() => onEdit(product)}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-colors"
-                      aria-label={`Edit ${product.name}`}
-                    >
-                      <Edit className="h-4 w-4" />
-                      Edit
-                    </button>
+                    <div className="flex items-center gap-2">
+                      {onEdit && (
+                        <button
+                          onClick={() => onEdit(product)}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-colors"
+                          aria-label={`Edit ${product.name}`}
+                        >
+                          <Edit className="h-4 w-4" />
+                          Edit
+                        </button>
+                      )}
+                      {onDelete && (
+                        <button
+                          onClick={() => onDelete(product)}
+                          className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors"
+                          aria-label={`Delete ${product.name}`}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          Delete
+                        </button>
+                      )}
+                    </div>
                   </td>
                 )}
               </tr>
