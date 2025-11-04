@@ -36,6 +36,18 @@ export function useProducts() {
     setIsModalOpen(false);
   };
 
+  const handleEditProduct = (product: Product) => {
+    // TODO: Implement edit functionality
+    console.log("Edit product:", product);
+    alert(`Edit functionality for "${product.name}" will be implemented soon!`);
+  };
+
+  const handleDeleteProduct = (product: Product) => {
+    if (confirm(`Are you sure you want to delete "${product.name}"?`)) {
+      setProducts((prev) => prev.filter((p) => p.id !== product.id));
+    }
+  };
+
   const totalSales = products.reduce((sum, product) => sum + product.price, 0);
 
   return {
@@ -46,5 +58,7 @@ export function useProducts() {
     setIsModalOpen,
     handleInputChange,
     handleAddProduct,
+    handleEditProduct,
+    handleDeleteProduct,
   };
 }

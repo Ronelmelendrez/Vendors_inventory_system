@@ -27,6 +27,8 @@ function AdminDashboard() {
     setIsModalOpen,
     handleInputChange,
     handleAddProduct,
+    handleEditProduct,
+    handleDeleteProduct,
   } = useProducts();
 
   const { user } = useAuth();
@@ -69,7 +71,11 @@ function AdminDashboard() {
 
             {/* Products Table */}
             <div className="mb-6">
-              <ProductsTable products={products} />
+              <ProductsTable 
+                products={products} 
+                onEdit={handleEditProduct}
+                onDelete={handleDeleteProduct}
+              />
             </div>
 
             {/* Dashboard Widgets Grid */}
