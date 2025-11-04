@@ -1,10 +1,4 @@
-import {
-  Package,
-  ShoppingCart,
-  Users,
-  DollarSign,
-  Boxes,
-} from "lucide-react";
+import { Package, ShoppingCart, Users, DollarSign, Boxes } from "lucide-react";
 import { QuickStat } from "./QuickStat";
 
 interface MetricsGridProps {

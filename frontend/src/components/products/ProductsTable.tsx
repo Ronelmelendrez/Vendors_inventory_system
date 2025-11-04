@@ -1,10 +1,12 @@
 import { Product } from "@/types/product";
+import { Edit } from "lucide-react";
 
 interface ProductsTableProps {
   products: Product[];
+  onEdit?: (product: Product) => void;
 }
 
-export function ProductsTable({ products }: ProductsTableProps) {
+export function ProductsTable({ products, onEdit }: ProductsTableProps) {
   if (products.length === 0) return null;
 
   return (
@@ -31,6 +33,11 @@ export function ProductsTable({ products }: ProductsTableProps) {
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                 Category
               </th>
+              {onEdit && (
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  Actions
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -51,6 +58,18 @@ export function ProductsTable({ products }: ProductsTableProps) {
                 <td className="px-4 py-3 text-sm text-gray-900">
                   {product.category}
                 </td>
+                {onEdit && (
+                  <td className="px-4 py-3 text-sm">
+                    <button
+                      onClick={() => onEdit(product)}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-colors"
+                      aria-label={`Edit ${product.name}`}
+                    >
+                      <Edit className="h-4 w-4" />
+                      Edit
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
