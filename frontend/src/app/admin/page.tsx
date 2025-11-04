@@ -76,6 +76,7 @@ function AdminDashboard() {
               <TopProducts />
               <SalesChart />
               <LowStockAlerts />
+              <SalesCalendar />
             </div>
 
             <WelcomeSection />
