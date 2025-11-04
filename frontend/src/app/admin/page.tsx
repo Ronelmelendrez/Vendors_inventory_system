@@ -37,11 +37,11 @@ function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Message for Admin */}
-        <div className="mb-6 bg-white rounded-lg shadow-sm border p-4">
-          <h2 className="text-lg font-semibold text-gray-900">
+        <div className="mb-6 bg-linear-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg border p-6">
+          <h2 className="text-xl font-bold text-white">
             Welcome, Admin! 👋
           </h2>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-sm text-blue-100 mt-1">
             You have full access to all products from all branches.
           </p>
         </div>
@@ -63,23 +63,35 @@ function AdminDashboard() {
               totalSales={totalSales}
             />
 
+            {/* Stats Cards */}
             <StatsGrid
               totalProducts={products.length}
               totalSales={totalSales}
             />
 
-            <ProductsTable products={products} />
-
-            {/* Dashboard Widgets Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-              <ActivityFeed />
-              <TopProducts />
-              <SalesChart />
-              <LowStockAlerts />
-              <SalesCalendar />
+            {/* Products Table */}
+            <div className="mb-6">
+              <ProductsTable products={products} />
             </div>
 
-            <WelcomeSection />
+            {/* Dashboard Widgets Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+              <div className="lg:col-span-2">
+                <ActivityFeed />
+              </div>
+              <div>
+                <TopProducts />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <SalesChart />
+              <LowStockAlerts />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              <SalesCalendar />
+            </div>
           </main>
         </div>
       </div>
