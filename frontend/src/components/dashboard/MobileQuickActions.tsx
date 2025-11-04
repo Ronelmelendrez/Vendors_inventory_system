@@ -2,9 +2,10 @@ import { Package, ShoppingCart, RotateCcw, FileText } from "lucide-react";
 
 interface MobileQuickActionsProps {
   onAddProduct: () => void;
+  onRecordSale?: () => void;
 }
 
-export function MobileQuickActions({ onAddProduct }: MobileQuickActionsProps) {
+export function MobileQuickActions({ onAddProduct, onRecordSale }: MobileQuickActionsProps) {
   return (
     <div className="lg:hidden mb-6">
       <div className="bg-white rounded-lg shadow-sm border p-4">
@@ -20,7 +21,7 @@ export function MobileQuickActions({ onAddProduct }: MobileQuickActionsProps) {
             <span className="text-sm font-medium">Add Product</span>
           </button>
           <button
-            onClick={() => {}}
+            onClick={onRecordSale || (() => {})}
             className="flex items-center justify-center gap-2 px-3 py-2 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
           >
             <ShoppingCart className="h-4 w-4" />

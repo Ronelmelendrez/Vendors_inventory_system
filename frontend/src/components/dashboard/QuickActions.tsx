@@ -2,6 +2,7 @@ import { Package, ShoppingCart, RotateCcw, FileText } from "lucide-react";
 
 interface QuickActionsProps {
   onAddProduct: () => void;
+  onRecordSale?: () => void;
 }
 
 interface ActionItemProps {
@@ -24,7 +25,7 @@ function ActionItem({ icon, text, onClick }: ActionItemProps) {
   );
 }
 
-export function QuickActions({ onAddProduct }: QuickActionsProps) {
+export function QuickActions({ onAddProduct, onRecordSale }: QuickActionsProps) {
   return (
     <aside className="bg-white rounded-lg shadow-sm border p-6 h-fit sticky top-8">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">
@@ -39,7 +40,7 @@ export function QuickActions({ onAddProduct }: QuickActionsProps) {
         <ActionItem
           icon={<ShoppingCart className="h-5 w-5" />}
           text="Record Sale"
-          onClick={() => {}}
+          onClick={onRecordSale || (() => {})}
         />
         <ActionItem
           icon={<RotateCcw className="h-5 w-5" />}
