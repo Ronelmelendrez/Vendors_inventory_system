@@ -4,6 +4,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Header } from "@/components/dashboard";
 import { User, Mail, Phone, MapPin, Building2, Globe } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { useProfile } from "@/hooks/useProfile";
 import { useState } from "react";
 
 interface ProfileFormData {
@@ -19,29 +20,14 @@ interface ProfileFormData {
 
 function SettingsContent() {
   const { user } = useAuth();
-  
-  const [formData, setFormData] = useState<ProfileFormData>({
-    firstName: "",
-    lastName: "",
-    email: user?.email || "",
-    phone: "",
-    address: "",
-    city: "",
-    country: "",
-    branch_name: user?.branch_name || "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: Implement profile update logic
-    alert("Profile updated successfully!");
-    console.log("Updated profile:", formData);
-  };
+  const {
+    formData,
+    isLoading,
+    isSaved,
+    handleInputChange,
+    handleSubmit,
+    handleReset,
+  } = useProfile();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -230,13 +216,16 @@ function SettingsContent() {
             <div className="mt-6 pt-6 border-t flex gap-3">
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                disabled={isLoading}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Save Changes
+                {isLoading ? "Saving..." : isSaved ? "✓ Saved" : "Save Changes"}
               </button>
               <button
                 type="button"
-                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                onClick={handleReset}
+                disabled={isLoading}
+                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Cancel
               </button>
