@@ -2,6 +2,7 @@
 
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Header } from "@/components/dashboard";
+import { PasswordChangeSection, AccountSettings } from "@/components/settings";
 import { User, Mail, Phone, MapPin, Building2, Globe } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useProfile } from "@/hooks/useProfile";
@@ -232,6 +233,12 @@ function SettingsContent() {
             </div>
           </form>
         </div>
+
+        {/* Password Change Section */}
+        <PasswordChangeSection />
+
+        {/* Account Settings Section */}
+        <AccountSettings />
       </div>
     </div>
   );
