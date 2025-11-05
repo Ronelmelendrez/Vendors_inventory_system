@@ -31,8 +31,7 @@ export function Header() {
 
   const handleSettings = () => {
     setIsMenuOpen(false);
-    // Add settings navigation or modal here
-    console.log("Settings clicked");
+    router.push("/settings");
   };
 
   return (
