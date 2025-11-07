@@ -5,6 +5,11 @@
   --foreground: #171717;
 }
 
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -13,7 +18,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
@@ -23,30 +28,56 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Make placeholder text black for better visibility */
+/* Make placeholder text visible in both light and dark modes */
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
-  color: #000000;
-  opacity: 0.6;
+  color: #6b7280;
+  opacity: 1;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder,
+.dark select::placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: #000000;
-  opacity: 0.6;
+  color: #6b7280;
+  opacity: 1;
+}
+
+.dark input::-webkit-input-placeholder,
+.dark textarea::-webkit-input-placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-  color: #000000;
-  opacity: 0.6;
+  color: #6b7280;
+  opacity: 1;
+}
+
+.dark input::-moz-placeholder,
+.dark textarea::-moz-placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: #000000;
-  opacity: 0.6;
+  color: #6b7280;
+  opacity: 1;
+}
+
+.dark input:-ms-input-placeholder,
+.dark textarea:-ms-input-placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
