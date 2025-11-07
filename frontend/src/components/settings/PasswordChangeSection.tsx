@@ -43,9 +43,9 @@ export function PasswordChangeSection() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 500));
-      
+
       alert("Password changed successfully!");
-      
+
       // Reset form
       setPasswordData({
         currentPassword: "",
@@ -61,10 +61,10 @@ export function PasswordChangeSection() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border mt-6">
-      <div className="p-6 border-b">
-        <h2 className="text-lg font-semibold text-gray-900">Change Password</h2>
-        <p className="text-sm text-gray-600 mt-1">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 mt-6">
+      <div className="p-6 border-b dark:border-gray-700">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Change Password</h2>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
           Update your password to keep your account secure
         </p>
       </div>
@@ -74,7 +74,7 @@ export function PasswordChangeSection() {
           <div>
             <label
               htmlFor="currentPassword"
-              className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               <Lock className="h-4 w-4" />
               Current Password
@@ -87,13 +87,13 @@ export function PasswordChangeSection() {
                 value={passwordData.currentPassword}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter current password"
               />
               <button
                 type="button"
                 onClick={() => togglePasswordVisibility("current")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
               >
                 {showPasswords.current ? (
                   <EyeOff className="h-4 w-4" />
@@ -107,7 +107,7 @@ export function PasswordChangeSection() {
           <div>
             <label
               htmlFor="newPassword"
-              className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               <Lock className="h-4 w-4" />
               New Password
@@ -121,13 +121,13 @@ export function PasswordChangeSection() {
                 onChange={handleChange}
                 required
                 minLength={8}
-                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter new password"
               />
               <button
                 type="button"
                 onClick={() => togglePasswordVisibility("new")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
               >
                 {showPasswords.new ? (
                   <EyeOff className="h-4 w-4" />
@@ -136,7 +136,7 @@ export function PasswordChangeSection() {
                 )}
               </button>
             </div>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Must be at least 8 characters long
             </p>
           </div>
@@ -144,7 +144,7 @@ export function PasswordChangeSection() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               <Lock className="h-4 w-4" />
               Confirm New Password
@@ -157,13 +157,13 @@ export function PasswordChangeSection() {
                 value={passwordData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Confirm new password"
               />
               <button
                 type="button"
                 onClick={() => togglePasswordVisibility("confirm")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
               >
                 {showPasswords.confirm ? (
                   <EyeOff className="h-4 w-4" />
@@ -179,7 +179,7 @@ export function PasswordChangeSection() {
           <button
             type="submit"
             disabled={isLoading}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "Changing Password..." : "Change Password"}
           </button>
