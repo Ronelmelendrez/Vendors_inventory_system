@@ -31,23 +31,23 @@ function SettingsContent() {
   } = useProfile();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-          <p className="text-sm text-gray-600 mt-1">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Settings</h1>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
             Manage your profile and account settings
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700">
+          <div className="p-6 border-b dark:border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Profile Information
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
               Update your personal details and contact information
             </p>
           </div>
@@ -57,7 +57,7 @@ function SettingsContent() {
               <div>
                 <label
                   htmlFor="firstName"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <User className="h-4 w-4" />
                   First Name
@@ -68,7 +68,7 @@ function SettingsContent() {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter first name"
                 />
               </div>
@@ -76,7 +76,7 @@ function SettingsContent() {
               <div>
                 <label
                   htmlFor="lastName"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <User className="h-4 w-4" />
                   Last Name
@@ -87,7 +87,7 @@ function SettingsContent() {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter last name"
                 />
               </div>
@@ -95,7 +95,7 @@ function SettingsContent() {
               <div className="md:col-span-2">
                 <label
                   htmlFor="email"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <Mail className="h-4 w-4" />
                   Email Address
@@ -106,11 +106,11 @@ function SettingsContent() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter email"
                   disabled
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   Email cannot be changed
                 </p>
               </div>
@@ -118,7 +118,7 @@ function SettingsContent() {
               <div>
                 <label
                   htmlFor="phone"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <Phone className="h-4 w-4" />
                   Phone Number
@@ -129,7 +129,7 @@ function SettingsContent() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter phone number"
                 />
               </div>
@@ -138,7 +138,7 @@ function SettingsContent() {
                 <div>
                   <label
                     htmlFor="branch_name"
-                    className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                   >
                     <Building2 className="h-4 w-4" />
                     Branch Name
@@ -149,7 +149,7 @@ function SettingsContent() {
                     name="branch_name"
                     value={formData.branch_name}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Branch name"
                     disabled
                   />
@@ -159,7 +159,7 @@ function SettingsContent() {
               <div className="md:col-span-2">
                 <label
                   htmlFor="address"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <MapPin className="h-4 w-4" />
                   Address
@@ -170,7 +170,7 @@ function SettingsContent() {
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter street address"
                 />
               </div>
@@ -178,7 +178,7 @@ function SettingsContent() {
               <div>
                 <label
                   htmlFor="city"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <Building2 className="h-4 w-4" />
                   City
@@ -189,7 +189,7 @@ function SettingsContent() {
                   name="city"
                   value={formData.city}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter city"
                 />
               </div>
@@ -197,7 +197,7 @@ function SettingsContent() {
               <div>
                 <label
                   htmlFor="country"
-                  className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   <Globe className="h-4 w-4" />
                   Country
@@ -208,7 +208,7 @@ function SettingsContent() {
                   name="country"
                   value={formData.country}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Enter country"
                 />
               </div>
@@ -218,7 +218,7 @@ function SettingsContent() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? "Saving..." : isSaved ? "✓ Saved" : "Save Changes"}
               </button>
@@ -226,7 +226,7 @@ function SettingsContent() {
                 type="button"
                 onClick={handleReset}
                 disabled={isLoading}
-                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Cancel
               </button>
