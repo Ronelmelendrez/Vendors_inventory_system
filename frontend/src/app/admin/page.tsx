@@ -59,7 +59,7 @@ function AdminDashboard() {
         </div>
 
         {/* Mobile Quick Actions */}
-        <MobileQuickActions 
+        <MobileQuickActions
           onAddProduct={() => setIsModalOpen(true)}
           onRecordSale={() => setIsSaleModalOpen(true)}
         />
@@ -67,7 +67,7 @@ function AdminDashboard() {
         <div className="flex gap-6">
           {/* Sidebar */}
           <div className="w-64 shrink-0 hidden lg:block">
-            <QuickActions 
+            <QuickActions
               onAddProduct={() => setIsModalOpen(true)}
               onRecordSale={() => setIsSaleModalOpen(true)}
             />

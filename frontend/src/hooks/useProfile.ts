@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 export function useProfile() {
   const { user } = useAuth();
-  
+
   const [formData, setFormData] = useState<ProfileFormData>({
     firstName: "",
     lastName: "",
@@ -46,13 +46,13 @@ export function useProfile() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 500));
-      
+
       // Save to localStorage
       localStorage.setItem("userProfile", JSON.stringify(formData));
-      
+
       setIsSaved(true);
       alert("Profile updated successfully!");
-      
+
       setTimeout(() => setIsSaved(false), 3000);
     } catch (error) {
       console.error("Error updating profile:", error);

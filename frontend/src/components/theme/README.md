@@ -5,6 +5,7 @@ A comprehensive dark mode implementation with localStorage persistence and smoot
 ## Features
 
 ### Theme Modes
+
 - **Light Mode**: Default bright theme with gray-50 backgrounds
 - **Dark Mode**: Dark theme with gray-900 backgrounds
 - **Auto-detect**: Respects system preference on first visit
@@ -12,6 +13,7 @@ A comprehensive dark mode implementation with localStorage persistence and smoot
 - **Smooth Transitions**: 0.3s ease transitions between modes
 
 ### Toggle Options
+
 - **Settings Page**: Theme toggle in Appearance section
 - **Icon Indicator**: Sun icon for light mode, Moon icon for dark mode
 - **Visual Feedback**: Clear button states and hover effects
@@ -19,6 +21,7 @@ A comprehensive dark mode implementation with localStorage persistence and smoot
 ## Implementation
 
 ### ThemeContext
+
 Provides global theme state management:
 
 ```tsx
@@ -26,16 +29,13 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 function MyComponent() {
   const { theme, toggleTheme } = useTheme();
-  
-  return (
-    <button onClick={toggleTheme}>
-      Current theme: {theme}
-    </button>
-  );
+
+  return <button onClick={toggleTheme}>Current theme: {theme}</button>;
 }
 ```
 
 ### ThemeProvider
+
 Wrap your app with ThemeProvider:
 
 ```tsx
@@ -45,6 +45,7 @@ Wrap your app with ThemeProvider:
 ```
 
 ### Dark Mode Classes
+
 Use Tailwind's dark: variant:
 
 ```tsx
@@ -57,6 +58,7 @@ Use Tailwind's dark: variant:
 ## Color Palette
 
 ### Light Mode
+
 - Background: `#ffffff` (white)
 - Foreground: `#171717` (gray-900)
 - Secondary Background: `#f9fafb` (gray-50)
@@ -65,6 +67,7 @@ Use Tailwind's dark: variant:
 - Text Secondary: `#6b7280` (gray-500)
 
 ### Dark Mode
+
 - Background: `#0a0a0a` (near black)
 - Foreground: `#ededed` (gray-100)
 - Secondary Background: `#1f2937` (gray-800)
@@ -75,18 +78,21 @@ Use Tailwind's dark: variant:
 ## Components with Dark Mode
 
 ### Settings Page (`/settings`)
+
 - ✅ Profile Information form
 - ✅ Password Change section
 - ✅ Account Settings section
 - ✅ Theme Toggle button
 
 ### Forms & Inputs
+
 - ✅ Text inputs with dark backgrounds
 - ✅ Select dropdowns
 - ✅ Buttons (primary, secondary)
 - ✅ Labels and placeholders
 
 ### Cards & Containers
+
 - ✅ White/dark-800 backgrounds
 - ✅ Gray-300/gray-700 borders
 - ✅ Shadow adjustments
@@ -94,35 +100,43 @@ Use Tailwind's dark: variant:
 ## Usage
 
 ### Toggle Theme
+
 Click the theme toggle button in Settings > Appearance section:
+
 - **Light Mode** → Shows Moon icon + "Dark Mode" text
 - **Dark Mode** → Shows Sun icon + "Light Mode" text
 
 ### System Preference
+
 On first visit, the theme follows your system preference:
+
 - If OS is in dark mode → App loads in dark mode
 - If OS is in light mode → App loads in light mode
 
 ### Manual Override
+
 Once you toggle the theme manually, your choice is saved and persists across sessions, overriding system preference.
 
 ## Technical Details
 
 ### localStorage Key
+
 ```javascript
-localStorage.getItem("theme") // Returns: "light" | "dark"
+localStorage.getItem("theme"); // Returns: "light" | "dark"
 ```
 
 ### HTML Class Toggle
+
 ```html
 <!-- Light mode -->
 <html lang="en" class="">
-
-<!-- Dark mode -->
-<html lang="en" class="dark">
+  <!-- Dark mode -->
+  <html lang="en" class="dark"></html>
+</html>
 ```
 
 ### CSS Variables
+
 ```css
 :root {
   --background: #ffffff;
@@ -155,6 +169,7 @@ frontend/src/
 ## Best Practices
 
 ### 1. Always Use Dark Variants
+
 ```tsx
 // ❌ Bad
 <div className="bg-white text-gray-900">
@@ -164,6 +179,7 @@ frontend/src/
 ```
 
 ### 2. Consistent Color Mapping
+
 - `gray-50` → `gray-900`
 - `gray-100` → `gray-800`
 - `gray-300` → `gray-700`
@@ -171,12 +187,15 @@ frontend/src/
 - `gray-900` → `gray-100`
 
 ### 3. Test Both Modes
+
 Always verify your UI works in both light and dark modes.
 
 ### 4. Border Visibility
+
 Ensure borders are visible in dark mode:
+
 ```tsx
-className="border border-gray-300 dark:border-gray-700"
+className = "border border-gray-300 dark:border-gray-700";
 ```
 
 ## Browser Support
@@ -206,15 +225,18 @@ className="border border-gray-300 dark:border-gray-700"
 ## Troubleshooting
 
 ### Theme not persisting
+
 - Check localStorage is enabled
 - Verify ThemeProvider wraps your app
 - Ensure suppressHydrationWarning is on `<html>`
 
 ### Flash of unstyled content
+
 - Add `suppressHydrationWarning` to html tag
 - Load theme before React hydration
 
 ### Dark mode not applying
+
 - Check for missing `dark:` prefixes
 - Verify Tailwind config includes dark mode
 - Ensure `.dark` class is on `<html>`
@@ -222,6 +244,7 @@ className="border border-gray-300 dark:border-gray-700"
 ## Examples
 
 ### Card Component
+
 ```tsx
 <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
   <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -234,6 +257,7 @@ className="border border-gray-300 dark:border-gray-700"
 ```
 
 ### Button Component
+
 ```tsx
 <button className="px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600">
   Click me
@@ -241,6 +265,7 @@ className="border border-gray-300 dark:border-gray-700"
 ```
 
 ### Input Component
+
 ```tsx
 <input
   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500"

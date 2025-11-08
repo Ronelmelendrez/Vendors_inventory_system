@@ -54,7 +54,9 @@ export function useSales() {
     setIsSaleModalOpen(false);
 
     alert(
-      `Sale recorded successfully!\nProduct: ${selectedProduct.name}\nQuantity: ${quantity}\nTotal: $${totalAmount.toFixed(2)}`
+      `Sale recorded successfully!\nProduct: ${
+        selectedProduct.name
+      }\nQuantity: ${quantity}\nTotal: $${totalAmount.toFixed(2)}`
     );
   };
 

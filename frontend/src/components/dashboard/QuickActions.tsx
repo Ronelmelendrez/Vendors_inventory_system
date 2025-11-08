@@ -25,7 +25,10 @@ function ActionItem({ icon, text, onClick }: ActionItemProps) {
   );
 }
 
-export function QuickActions({ onAddProduct, onRecordSale }: QuickActionsProps) {
+export function QuickActions({
+  onAddProduct,
+  onRecordSale,
+}: QuickActionsProps) {
   return (
     <aside className="bg-white rounded-lg shadow-sm border p-6 h-fit sticky top-8">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">

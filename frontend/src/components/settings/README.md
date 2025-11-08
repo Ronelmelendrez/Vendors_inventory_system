@@ -5,6 +5,7 @@ This module provides comprehensive profile and account management functionality 
 ## Features
 
 ### 1. Profile Management
+
 - **Personal Information**: Update first name, last name, phone, address, city, and country
 - **Email Display**: View email address (cannot be changed)
 - **Branch Information**: Branch users can view their assigned branch name
@@ -12,6 +13,7 @@ This module provides comprehensive profile and account management functionality 
 - **Loading States**: Visual feedback during save operations
 
 ### 2. Password Management
+
 - **Current Password**: Required for verification
 - **New Password**: Must be at least 8 characters
 - **Password Confirmation**: Ensures accuracy
@@ -19,6 +21,7 @@ This module provides comprehensive profile and account management functionality 
 - **Validation**: Client-side validation before submission
 
 ### 3. Account Settings
+
 - **Notification Preferences**:
   - Email Notifications
   - Sales Alerts
@@ -30,19 +33,25 @@ This module provides comprehensive profile and account management functionality 
 ## Components
 
 ### SettingsPage (`/settings/page.tsx`)
+
 Main settings page with three sections:
+
 - Profile Information form
 - Password Change section
 - Account Settings section
 
 ### PasswordChangeSection
+
 Standalone component for password changes:
+
 ```tsx
 <PasswordChangeSection />
 ```
 
 ### AccountSettings
+
 Notification and account management:
+
 ```tsx
 <AccountSettings />
 ```
@@ -50,7 +59,9 @@ Notification and account management:
 ## Custom Hooks
 
 ### useProfile
+
 Manages profile form state and persistence:
+
 ```tsx
 const {
   formData,
@@ -63,6 +74,7 @@ const {
 ```
 
 **Features**:
+
 - Auto-loads saved profile from localStorage
 - Handles form input changes
 - Submits with loading states
@@ -72,7 +84,9 @@ const {
 ## Data Storage
 
 ### Profile Data
+
 Stored in localStorage as `userProfile`:
+
 ```json
 {
   "firstName": "John",
@@ -85,7 +99,9 @@ Stored in localStorage as `userProfile`:
 ```
 
 ### Notification Settings
+
 Stored in localStorage as `notificationSettings`:
+
 ```json
 {
   "emailNotifications": true,
@@ -98,6 +114,7 @@ Stored in localStorage as `notificationSettings`:
 ## Navigation
 
 Access settings from the Header dropdown menu:
+
 1. Click user avatar (top right)
 2. Select "Settings" from dropdown
 3. Redirects to `/settings` page
@@ -105,12 +122,14 @@ Access settings from the Header dropdown menu:
 ## User Roles
 
 ### Admin Users
+
 - Full access to all settings
 - Can modify profile information
 - Can change password
 - Can manage notifications
 
 ### Branch Users
+
 - Full access to all settings
 - Can view branch name (read-only)
 - Same capabilities as admin for personal settings
@@ -142,7 +161,7 @@ Access settings from the Header dropdown menu:
 router.push("/settings");
 
 // Or from Header dropdown
-<Header /> // Settings option automatically included
+<Header />; // Settings option automatically included
 ```
 
 ## File Structure

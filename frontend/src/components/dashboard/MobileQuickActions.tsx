@@ -5,7 +5,10 @@ interface MobileQuickActionsProps {
   onRecordSale?: () => void;
 }
 
-export function MobileQuickActions({ onAddProduct, onRecordSale }: MobileQuickActionsProps) {
+export function MobileQuickActions({
+  onAddProduct,
+  onRecordSale,
+}: MobileQuickActionsProps) {
   return (
     <div className="lg:hidden mb-6">
       <div className="bg-white rounded-lg shadow-sm border p-4">
