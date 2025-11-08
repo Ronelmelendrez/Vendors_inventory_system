@@ -34,6 +34,11 @@ export function Header() {
     router.push("/settings");
   };
 
+  const handleProfile = () => {
+    setIsMenuOpen(false);
+    router.push("/profile");
+  };
+
   return (
     <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -77,6 +82,13 @@ export function Header() {
                       </p>
                     </div>
                   </div>
+                  <button
+                    onClick={handleProfile}
+                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                  >
+                    <User className="h-4 w-4" />
+                    <span>View Profile</span>
+                  </button>
                   <button
                     onClick={handleSettings}
                     className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
