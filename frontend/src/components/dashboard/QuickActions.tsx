@@ -145,7 +145,7 @@ export function QuickActions({
 
         {/* Branch Selection Modal */}
         {showBranchSelection && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
               {/* Modal Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
