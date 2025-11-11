@@ -42,9 +42,12 @@ export function MobileQuickActions({
 
   const colorClasses = {
     blue: "bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 border-blue-100 dark:border-blue-900/50",
-    green: "bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/30 border-green-100 dark:border-green-900/50",
-    orange: "bg-orange-50 dark:bg-orange-950/20 text-orange-700 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-orange-100 dark:border-orange-900/50",
-    purple: "bg-purple-50 dark:bg-purple-950/20 text-purple-700 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30 border-purple-100 dark:border-purple-900/50",
+    green:
+      "bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/30 border-green-100 dark:border-green-900/50",
+    orange:
+      "bg-orange-50 dark:bg-orange-950/20 text-orange-700 dark:text-orange-400 hover:bg-orange-100 dark:hover:bg-orange-900/30 border-orange-100 dark:border-orange-900/50",
+    purple:
+      "bg-purple-50 dark:bg-purple-950/20 text-purple-700 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/30 border-purple-100 dark:border-purple-900/50",
   };
 
   return (
@@ -63,7 +66,11 @@ export function MobileQuickActions({
                 relative flex items-center justify-center gap-2 px-3 py-2.5 
                 rounded-lg transition-all duration-200 border
                 ${colorClasses[action.color as keyof typeof colorClasses]}
-                ${!action.available ? 'opacity-50 cursor-not-allowed' : 'hover:scale-105 active:scale-95'}
+                ${
+                  !action.available
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:scale-105 active:scale-95"
+                }
               `}
             >
               <action.icon className="h-4 w-4" />
@@ -78,7 +85,11 @@ export function MobileQuickActions({
         </div>
         <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            💡 <span className="font-medium">Tip:</span> Press <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px] font-mono">Ctrl+N</kbd> for quick product add
+            💡 <span className="font-medium">Tip:</span> Press{" "}
+            <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px] font-mono">
+              Ctrl+N
+            </kbd>{" "}
+            for quick product add
           </p>
         </div>
       </div>

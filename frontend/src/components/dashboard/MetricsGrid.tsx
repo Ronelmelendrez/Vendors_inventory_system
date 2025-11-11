@@ -76,7 +76,7 @@ function AreaChart({
         preserveAspectRatio="none"
       >
         {showGrid && (
-          <g className="text-gray-200 dark:text-gray-700">
+          <g className="text-gray-200">
             {[0.25, 0.5, 0.75].map((factor) => (
               <line
                 key={factor}
@@ -151,7 +151,7 @@ function AreaChart({
                 fill="white"
                 stroke={color}
                 strokeWidth={isHovered ? 2.5 : 2}
-                className="transition-all duration-200 dark:fill-gray-800"
+                className="transition-all duration-200"
               />
               {showTooltip && isHovered && (
                 <>
@@ -259,7 +259,7 @@ function ProgressRing({
             fill="none"
             stroke="currentColor"
             strokeWidth={strokeWidth}
-            className="text-gray-200 dark:text-gray-700"
+            className="text-gray-200"
             opacity="0.3"
           />
 
@@ -284,11 +284,11 @@ function ProgressRing({
         </svg>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          <span className="text-xl font-bold text-gray-900">
             {Math.round(currentPercentage)}%
           </span>
           {label && (
-            <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+            <span className="text-xs text-gray-500 mt-0.5">
               {label}
             </span>
           )}
@@ -335,7 +335,7 @@ function MiniBarChart({
               onMouseLeave={() => setHoveredIndex(null)}
             >
               {showValues && isHovered && (
-                <div className="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded whitespace-nowrap z-10 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                <div className="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap z-10 animate-in fade-in slide-in-from-bottom-2 duration-200">
                   {item.value} ({percentage}%)
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
                 </div>
@@ -365,7 +365,7 @@ function MiniBarChart({
       <div className="flex justify-between gap-1.5">
         {data.map((item, index) => (
           <div key={index} className="flex-1 text-center">
-            <span className="text-xs text-gray-600 dark:text-gray-400 truncate block">
+            <span className="text-xs text-gray-600 truncate block">
               {item.label}
             </span>
           </div>
@@ -383,11 +383,11 @@ function MiniBarChart({
                 className="w-2.5 h-2.5 rounded-sm"
                 style={{ backgroundColor: item.color }}
               ></div>
-              <span className="text-gray-600 dark:text-gray-400 truncate">
+              <span className="text-gray-600 truncate">
                 {item.label}
               </span>
             </div>
-            <span className="font-medium text-gray-900 dark:text-gray-100">
+            <span className="font-medium text-gray-900">
               {((item.value / totalValue) * 100).toFixed(0)}%
             </span>
           </div>
@@ -435,7 +435,7 @@ function MonthlyMetric({
   const isAboveAverage = currentValue > average;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-green-500/5 to-transparent rounded-full blur-2xl"></div>
 
       <div className="relative">
@@ -445,30 +445,30 @@ function MonthlyMetric({
               <Icon className="h-4 w-4 text-white" />
             </div>
             <div>
-              <span className="text-sm font-medium text-gray-600 dark:text-gray-400 block">
+              <span className="text-sm font-medium text-gray-600 block">
                 {label}
               </span>
               {subtitle && (
-                <span className="text-xs text-gray-500 dark:text-gray-500">
+                <span className="text-xs text-gray-500">
                   {subtitle}
                 </span>
               )}
             </div>
           </div>
-          <Calendar className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+          <Calendar className="h-4 w-4 text-gray-400" />
         </div>
 
         <div className="mb-4 space-y-2">
           <div className="flex items-baseline gap-2">
-            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <div className="text-2xl font-bold text-gray-900">
               {value}
             </div>
             {trend !== 0 && (
               <div
                 className={`flex items-center gap-1 text-sm font-semibold ${
                   isPositiveTrend
-                    ? "text-green-600 dark:text-green-400"
-                    : "text-red-600 dark:text-red-400"
+                    ? "text-green-600"
+                    : "text-red-600"
                 }`}
               >
                 {isPositiveTrend ? (
@@ -482,14 +482,14 @@ function MonthlyMetric({
           </div>
 
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-gray-500 dark:text-gray-400">
+            <span className="text-gray-500">
               Avg: {average.toFixed(0)}
             </span>
             <span
               className={`font-semibold ${
                 isAboveAverage
-                  ? "text-green-600 dark:text-green-400"
-                  : "text-gray-600 dark:text-gray-400"
+                  ? "text-green-600"
+                  : "text-gray-600"
               }`}
             >
               {isAboveAverage ? "↑ Above average" : "↓ Below average"}
@@ -505,9 +505,9 @@ function MonthlyMetric({
           showTooltip={true}
         />
 
-        <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex justify-between mt-2 text-xs text-gray-500">
           <span>{monthlyData[0]?.month}</span>
-          <span className="font-medium text-gray-700 dark:text-gray-300">
+          <span className="font-medium text-gray-700">
             {monthlyData[monthlyData.length - 1]?.month}
           </span>
         </div>
@@ -547,19 +547,19 @@ function TopBranchMetric({
     if (score >= 90)
       return {
         label: "Excellent",
-        color: "text-emerald-600 dark:text-emerald-400",
+        color: "text-emerald-600",
       };
     if (score >= 75)
-      return { label: "Great", color: "text-green-600 dark:text-green-400" };
+      return { label: "Great", color: "text-green-600" };
     if (score >= 60)
-      return { label: "Good", color: "text-blue-600 dark:text-blue-400" };
-    return { label: "Average", color: "text-yellow-600 dark:text-yellow-400" };
+      return { label: "Good", color: "text-blue-600" };
+    return { label: "Average", color: "text-yellow-600" };
   };
 
   const rank = getPerformanceRank(performance);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-orange-500/5 to-transparent rounded-full blur-2xl"></div>
 
       <div className="relative">
@@ -567,7 +567,7 @@ function TopBranchMetric({
           <div className={`${color} p-2 rounded-lg`}>
             <Icon className="h-4 w-4 text-white" />
           </div>
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+          <span className="text-sm font-medium text-gray-600">
             {label}
           </span>
         </div>
@@ -576,7 +576,7 @@ function TopBranchMetric({
           <div className="flex-1 space-y-3">
             <div className="flex items-center gap-2">
               <Crown className="h-5 w-5 text-yellow-500 shrink-0" />
-              <div className="text-lg font-bold text-gray-900 dark:text-gray-100 truncate">
+              <div className="text-lg font-bold text-gray-900 truncate">
                 {branchName}
               </div>
             </div>
@@ -589,18 +589,18 @@ function TopBranchMetric({
             </div>
 
             <div className="flex items-center gap-2 text-sm">
-              <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400 shrink-0" />
+              <TrendingUp className="h-4 w-4 text-green-600 shrink-0" />
               <div>
-                <span className="font-bold text-gray-900 dark:text-gray-100">
+                <span className="font-bold text-gray-900">
                   {sales.toLocaleString()}
                 </span>
-                <span className="text-gray-600 dark:text-gray-400 ml-1">
+                <span className="text-gray-600 ml-1">
                   total sales
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-500">
+            <div className="flex items-center gap-2 text-xs text-gray-500">
               <Target className="h-3 w-3" />
               <span>Performance Leader</span>
             </div>
@@ -650,26 +650,26 @@ function LowStockMetric({
       return {
         label: "Critical",
         color: "bg-red-600",
-        text: "text-red-600 dark:text-red-400",
+        text: "text-red-600",
         icon: AlertCircle,
       };
     if (percentage < 30)
       return {
         label: "Urgent",
         color: "bg-orange-500",
-        text: "text-orange-600 dark:text-orange-400",
+        text: "text-orange-600",
         icon: AlertTriangle,
       };
     return {
       label: "Low",
       color: "bg-yellow-500",
-      text: "text-yellow-600 dark:text-yellow-400",
+      text: "text-yellow-600",
       icon: TrendingDown,
     };
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
       <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full blur-2xl animate-pulse"></div>
 
       <div className="relative">
@@ -677,19 +677,19 @@ function LowStockMetric({
           <div className={`${color} p-2 rounded-lg`}>
             <Icon className="h-4 w-4 text-white" />
           </div>
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+          <span className="text-sm font-medium text-gray-600">
             {label}
           </span>
         </div>
 
         <div className="mb-4">
           <div className="flex items-baseline gap-2">
-            <div className="text-3xl font-bold text-red-600 dark:text-red-400">
+            <div className="text-3xl font-bold text-red-600">
               {totalLowStock}
             </div>
-            <AlertTriangle className="h-5 w-5 text-red-600 dark:text-red-400 animate-pulse" />
+            <AlertTriangle className="h-5 w-5 text-red-600 animate-pulse" />
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             Items require immediate attention
           </p>
         </div>
@@ -703,12 +703,12 @@ function LowStockMetric({
             return (
               <div
                 key={index}
-                className="space-y-1.5 p-2 rounded-lg bg-gray-50 dark:bg-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="space-y-1.5 p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 flex-1 min-w-0">
                     <Package className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium truncate">
+                    <span className="text-xs text-gray-700 font-medium truncate">
                       {item.name}
                     </span>
                   </div>
@@ -720,7 +720,7 @@ function LowStockMetric({
                   </div>
                 </div>
 
-                <div className="relative w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2 overflow-hidden">
+                <div className="relative w-full bg-gray-200 rounded-full h-2 overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all duration-700 ${urgency.color} relative overflow-hidden`}
                     style={{ width: `${Math.min(percentage, 100)}%` }}
@@ -733,7 +733,7 @@ function LowStockMetric({
                   <span className={`text-xs font-semibold ${urgency.text}`}>
                     {urgency.label}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                  <span className="text-xs text-gray-500">
                     {percentage.toFixed(0)}% remaining
                   </span>
                 </div>
@@ -744,7 +744,7 @@ function LowStockMetric({
 
         {totalLowStock > items.length && (
           <div className="mt-3 p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-            <div className="flex items-center gap-2 text-xs text-orange-600 dark:text-orange-400 font-medium">
+            <div className="flex items-center gap-2 text-xs text-orange-600 font-medium">
               <AlertTriangle className="h-3.5 w-3.5" />
               <span>
                 +{totalLowStock - items.length} more items need restocking
@@ -778,7 +778,7 @@ function CategoryMetric({
   const totalSum = categories.reduce((sum, cat) => sum + cat.value, 0);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-purple-500/5 to-transparent rounded-full blur-2xl"></div>
 
       <div className="relative">
@@ -787,7 +787,7 @@ function CategoryMetric({
             <div className="bg-purple-600 p-2 rounded-lg">
               <Icon className="h-4 w-4 text-white" />
             </div>
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <span className="text-sm font-medium text-gray-600">
               {label}
             </span>
           </div>
@@ -796,18 +796,18 @@ function CategoryMetric({
 
         <div className="mb-4 space-y-2">
           {totalValue && (
-            <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+            <div className="text-2xl font-bold text-gray-900">
               {totalValue}
             </div>
           )}
           <div className="flex items-center gap-2 text-sm">
-            <TrendingUp className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
-            <span className="text-gray-600 dark:text-gray-400">
-              <span className="font-semibold text-gray-900 dark:text-gray-100">
+            <TrendingUp className="h-3.5 w-3.5 text-green-600" />
+            <span className="text-gray-600">
+              <span className="font-semibold text-gray-900">
                 {topCategory.label}
               </span>{" "}
               leading with{" "}
-              <span className="font-semibold text-gray-900 dark:text-gray-100">
+              <span className="font-semibold text-gray-900">
                 {((topCategory.value / totalSum) * 100).toFixed(1)}%
               </span>
             </span>
@@ -866,7 +866,7 @@ export function MetricsGrid({ monthlySales = 1243 }: MetricsGridProps) {
   );
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
       <MonthlyMetric
         label="Monthly Sales"
         value={monthlySales.toLocaleString()}
@@ -902,3 +902,4 @@ export function MetricsGrid({ monthlySales = 1243 }: MetricsGridProps) {
     </div>
   );
 }
+
