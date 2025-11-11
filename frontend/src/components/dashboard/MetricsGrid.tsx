@@ -333,7 +333,7 @@ function MiniBarChart({
               onMouseLeave={() => setHoveredIndex(null)}
             >
               {showValues && isHovered && (
-                <div className="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap z-10 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                <div className="absolute bottom-full mb-1 px-2 py-1 bg-gray-900 text-white text-xs rounded whitespace-nowrap animate-in fade-in slide-in-from-bottom-2 duration-200">
                   {item.value} ({percentage}%)
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
                 </div>
