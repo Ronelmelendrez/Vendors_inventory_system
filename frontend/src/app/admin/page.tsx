@@ -76,9 +76,7 @@ function AdminDashboard() {
           {/* Main Content */}
           <main className="flex-1 min-w-0">
             {/* Metrics Overview */}
-            <MetricsGrid
-              monthlySales={totalSales}
-            />
+            <MetricsGrid monthlySales={totalSales} />
 
             {/* Stats Cards */}
             <StatsGrid
