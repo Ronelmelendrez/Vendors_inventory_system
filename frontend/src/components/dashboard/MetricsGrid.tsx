@@ -288,9 +288,7 @@ function ProgressRing({
             {Math.round(currentPercentage)}%
           </span>
           {label && (
-            <span className="text-xs text-gray-500 mt-0.5">
-              {label}
-            </span>
+            <span className="text-xs text-gray-500 mt-0.5">{label}</span>
           )}
         </div>
       </div>
@@ -383,9 +381,7 @@ function MiniBarChart({
                 className="w-2.5 h-2.5 rounded-sm"
                 style={{ backgroundColor: item.color }}
               ></div>
-              <span className="text-gray-600 truncate">
-                {item.label}
-              </span>
+              <span className="text-gray-600 truncate">{item.label}</span>
             </div>
             <span className="font-medium text-gray-900">
               {((item.value / totalValue) * 100).toFixed(0)}%
@@ -450,9 +446,7 @@ function MonthlyMetric({
                 {label}
               </span>
               {subtitle && (
-                <span className="text-xs text-gray-500">
-                  {subtitle}
-                </span>
+                <span className="text-xs text-gray-500">{subtitle}</span>
               )}
             </div>
           </div>
@@ -461,15 +455,11 @@ function MonthlyMetric({
 
         <div className="mb-4 space-y-2">
           <div className="flex items-baseline gap-2">
-            <div className="text-2xl font-bold text-gray-900">
-              {value}
-            </div>
+            <div className="text-2xl font-bold text-gray-900">{value}</div>
             {trend !== 0 && (
               <div
                 className={`flex items-center gap-1 text-sm font-semibold ${
-                  isPositiveTrend
-                    ? "text-green-600"
-                    : "text-red-600"
+                  isPositiveTrend ? "text-green-600" : "text-red-600"
                 }`}
               >
                 {isPositiveTrend ? (
@@ -483,14 +473,10 @@ function MonthlyMetric({
           </div>
 
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-gray-500">
-              Avg: {average.toFixed(0)}
-            </span>
+            <span className="text-gray-500">Avg: {average.toFixed(0)}</span>
             <span
               className={`font-semibold ${
-                isAboveAverage
-                  ? "text-green-600"
-                  : "text-gray-600"
+                isAboveAverage ? "text-green-600" : "text-gray-600"
               }`}
             >
               {isAboveAverage ? "↑ Above average" : "↓ Below average"}
@@ -550,10 +536,8 @@ function TopBranchMetric({
         label: "Excellent",
         color: "text-emerald-600",
       };
-    if (score >= 75)
-      return { label: "Great", color: "text-green-600" };
-    if (score >= 60)
-      return { label: "Good", color: "text-blue-600" };
+    if (score >= 75) return { label: "Great", color: "text-green-600" };
+    if (score >= 60) return { label: "Good", color: "text-blue-600" };
     return { label: "Average", color: "text-yellow-600" };
   };
 
@@ -569,9 +553,7 @@ function TopBranchMetric({
           <div className={`${color} p-2 rounded-lg`}>
             <Icon className="h-4 w-4 text-white" />
           </div>
-          <span className="text-sm font-medium text-gray-600">
-            {label}
-          </span>
+          <span className="text-sm font-medium text-gray-600">{label}</span>
         </div>
 
         <div className="flex items-start justify-between gap-4">
@@ -596,9 +578,7 @@ function TopBranchMetric({
                 <span className="font-bold text-gray-900">
                   {sales.toLocaleString()}
                 </span>
-                <span className="text-gray-600 ml-1">
-                  total sales
-                </span>
+                <span className="text-gray-600 ml-1">total sales</span>
               </div>
             </div>
 
@@ -680,9 +660,7 @@ function LowStockMetric({
           <div className={`${color} p-2 rounded-lg`}>
             <Icon className="h-4 w-4 text-white" />
           </div>
-          <span className="text-sm font-medium text-gray-600">
-            {label}
-          </span>
+          <span className="text-sm font-medium text-gray-600">{label}</span>
         </div>
 
         <div className="mb-4">
@@ -791,18 +769,14 @@ function CategoryMetric({
             <div className="bg-purple-600 p-2 rounded-lg">
               <Icon className="h-4 w-4 text-white" />
             </div>
-            <span className="text-sm font-medium text-gray-600">
-              {label}
-            </span>
+            <span className="text-sm font-medium text-gray-600">{label}</span>
           </div>
           <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
         </div>
 
         <div className="mb-4 space-y-2">
           {totalValue && (
-            <div className="text-2xl font-bold text-gray-900">
-              {totalValue}
-            </div>
+            <div className="text-2xl font-bold text-gray-900">{totalValue}</div>
           )}
           <div className="flex items-center gap-2 text-sm">
             <TrendingUp className="h-3.5 w-3.5 text-green-600" />
@@ -873,15 +847,19 @@ export function MetricsGrid({ monthlySales = 1243 }: MetricsGridProps) {
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-lg font-bold text-gray-900">Performance Widgets</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Track your key metrics at a glance</p>
+          <h2 className="text-lg font-bold text-gray-900">
+            Performance Widgets
+          </h2>
+          <p className="text-sm text-gray-500 mt-0.5">
+            Track your key metrics at a glance
+          </p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full">
           <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
           <span className="text-xs font-medium text-blue-700">Live Data</span>
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <MonthlyMetric
           label="Monthly Sales"
@@ -919,4 +897,3 @@ export function MetricsGrid({ monthlySales = 1243 }: MetricsGridProps) {
     </div>
   );
 }
-

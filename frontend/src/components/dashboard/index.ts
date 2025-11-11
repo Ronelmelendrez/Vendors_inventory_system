@@ -4,9 +4,13 @@ export { QuickActions } from "./QuickActions";
 export { MobileQuickActions } from "./MobileQuickActions";
 export { WelcomeSection } from "./WelcomeSection";
 export { QuickStat } from "./QuickStat";
-export { ActivityFeed } from "./ActivityFeed";
-export { TopProducts } from "./TopProducts";
-export { SalesChart } from "./SalesChart";
-export { LowStockAlerts } from "./LowStockAlerts";
-export { SalesCalendar } from "./SalesCalendar";
 export { MetricsGrid } from "./MetricsGrid";
+
+// Dashboard Widgets (consolidated)
+export {
+  ActivityFeed,
+  TopProducts,
+  SalesChart,
+  LowStockAlerts,
+  SalesCalendar,
+} from "./DashboardWidgets";
