@@ -5,6 +5,7 @@ A comprehensive user profile system with stats, activity tracking, and achieveme
 ## Features
 
 ### 1. User Profile Card (`UserProfile.tsx`)
+
 - **Avatar Display**: Shows user initials in gradient background
 - **Personal Information**: Name, email, phone, address
 - **Role & Branch**: Displays user role and associated branch
@@ -13,6 +14,7 @@ A comprehensive user profile system with stats, activity tracking, and achieveme
 - **Dark Mode**: Full support for light and dark themes
 
 ### 2. Profile Statistics (`ProfileStats.tsx`)
+
 - **Activity Metrics**: Products, Sales, Revenue, Growth
 - **Trend Indicators**: Shows increase/decrease percentages
 - **Visual Icons**: Each metric has a distinctive icon
@@ -20,6 +22,7 @@ A comprehensive user profile system with stats, activity tracking, and achieveme
 - **Dark Mode**: Themed cards and text
 
 ### 3. Recent Activity (`ProfileActivity.tsx`)
+
 - **Activity Timeline**: Last 10 user actions
 - **Type Indicators**: Color-coded by activity type
   - 🔵 Product actions (blue)
@@ -30,6 +33,7 @@ A comprehensive user profile system with stats, activity tracking, and achieveme
 - **Hover Effects**: Interactive list items
 
 ### 4. Achievement Badges (`ProfileBadges.tsx`)
+
 - **Badge System**: 6 unique achievements
   - ⭐ Early Adopter
   - 🏆 Top Seller
@@ -44,12 +48,15 @@ A comprehensive user profile system with stats, activity tracking, and achieveme
 ## Usage
 
 ### Viewing Profile
+
 Navigate to `/profile` from the user menu in the header:
+
 1. Click on user avatar in top-right
 2. Select "View Profile"
 3. View your stats, activity, and achievements
 
 ### Profile Page Layout
+
 ```tsx
 /profile
 ├── UserProfile (left column)
@@ -62,13 +69,15 @@ Navigate to `/profile` from the user menu in the header:
 ## Components
 
 ### UserProfile
+
 ```tsx
 import { UserProfile } from "@/components/profile/UserProfile";
 
-<UserProfile />
+<UserProfile />;
 ```
 
 Displays:
+
 - User avatar with initials
 - Full name and role
 - Contact information
@@ -76,38 +85,44 @@ Displays:
 - Join date
 
 ### ProfileStats
+
 ```tsx
 import { ProfileStats } from "@/components/profile/ProfileStats";
 
-<ProfileStats />
+<ProfileStats />;
 ```
 
 Shows 4 key metrics:
+
 - Total Products
 - Total Sales
 - Revenue
 - Growth percentage
 
 ### ProfileActivity
+
 ```tsx
 import { ProfileActivity } from "@/components/profile/ProfileActivity";
 
-<ProfileActivity />
+<ProfileActivity />;
 ```
 
 Lists recent user activities with:
+
 - Activity type icon
 - Description
 - Timestamp
 
 ### ProfileBadges
+
 ```tsx
 import { ProfileBadges } from "@/components/profile/ProfileBadges";
 
-<ProfileBadges />
+<ProfileBadges />;
 ```
 
 Displays achievement badges with:
+
 - Visual badge icons
 - Earned/locked states
 - Earned dates
@@ -116,6 +131,7 @@ Displays achievement badges with:
 ## Data Management
 
 ### useUserProfile Hook
+
 ```tsx
 import { useUserProfile } from "@/hooks/useUserProfile";
 
@@ -134,6 +150,7 @@ const {
 #### Methods
 
 **updateStats(newStats)**
+
 ```tsx
 updateStats({
   totalProducts: 10,
@@ -143,6 +160,7 @@ updateStats({
 ```
 
 **addActivity(activity)**
+
 ```tsx
 addActivity({
   type: "product",
@@ -152,6 +170,7 @@ addActivity({
 ```
 
 **earnBadge(badgeId)**
+
 ```tsx
 earnBadge("2"); // Earn Top Seller badge
 ```
@@ -159,6 +178,7 @@ earnBadge("2"); // Earn Top Seller badge
 ## localStorage Schema
 
 ### User Profile
+
 ```json
 {
   "firstName": "John",
@@ -172,6 +192,7 @@ earnBadge("2"); // Earn Top Seller badge
 ```
 
 ### User Stats
+
 ```json
 {
   "totalProducts": 25,
@@ -186,6 +207,7 @@ earnBadge("2"); // Earn Top Seller badge
 ```
 
 ### User Activities
+
 ```json
 [
   {
@@ -198,6 +220,7 @@ earnBadge("2"); // Earn Top Seller badge
 ```
 
 ### User Badges
+
 ```json
 [
   {
@@ -213,42 +236,48 @@ earnBadge("2"); // Earn Top Seller badge
 ## Styling
 
 ### Dark Mode Classes
+
 All components support dark mode with these patterns:
 
 ```tsx
 // Backgrounds
-className="bg-white dark:bg-gray-800"
+className = "bg-white dark:bg-gray-800";
 
 // Text
-className="text-gray-900 dark:text-gray-100"
+className = "text-gray-900 dark:text-gray-100";
 
 // Borders
-className="border dark:border-gray-700"
+className = "border dark:border-gray-700";
 
 // Hover states
-className="hover:bg-gray-50 dark:hover:bg-gray-700"
+className = "hover:bg-gray-50 dark:hover:bg-gray-700";
 ```
 
 ### Responsive Design
+
 ```tsx
 // Grid columns
-className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+className = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
 
 // Layout
-className="lg:col-span-1" // Left column
-className="lg:col-span-2" // Right column
+className = "lg:col-span-1"; // Left column
+className = "lg:col-span-2"; // Right column
 ```
 
 ## Integration
 
 ### Header Navigation
+
 Profile link added to user dropdown menu:
+
 - "View Profile" button
 - Navigates to `/profile`
 - Closes menu on click
 
 ### Settings Integration
+
 Profile data is shared with Settings page:
+
 - Edit profile information in Settings
 - Changes reflect in Profile view
 - Synchronized via localStorage
@@ -264,6 +293,7 @@ Header → User Menu → View Profile → /profile
 ## Dark Mode Support
 
 All profile components fully support dark mode:
+
 - Automatic theme detection
 - Smooth transitions
 - Themed gradients
@@ -282,6 +312,7 @@ All profile components fully support dark mode:
 ## Future Enhancements
 
 Potential additions:
+
 - Edit profile from profile page
 - Export profile data
 - Share achievements
@@ -296,7 +327,12 @@ Potential additions:
 ```tsx
 "use client";
 
-import { UserProfile, ProfileStats, ProfileActivity, ProfileBadges } from "@/components/profile";
+import {
+  UserProfile,
+  ProfileStats,
+  ProfileActivity,
+  ProfileBadges,
+} from "@/components/profile";
 
 export default function ProfilePage() {
   return (

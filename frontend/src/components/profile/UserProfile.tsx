@@ -59,7 +59,9 @@ export function UserProfile() {
         {/* Avatar */}
         <div className="flex items-start -mt-16 mb-4">
           <div className="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl">
-            <span className="text-4xl font-bold text-white">{getInitials()}</span>
+            <span className="text-4xl font-bold text-white">
+              {getInitials()}
+            </span>
           </div>
         </div>
 
@@ -69,7 +71,8 @@ export function UserProfile() {
             {getFullName()}
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 capitalize mt-1">
-            {user?.role || "User"} {user?.branch_name && `• ${user.branch_name}`}
+            {user?.role || "User"}{" "}
+            {user?.branch_name && `• ${user.branch_name}`}
           </p>
         </div>
 
@@ -107,9 +110,7 @@ export function UserProfile() {
 
           <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
             <Calendar className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-            <span className="text-sm">
-              Joined {profileData.joinedDate}
-            </span>
+            <span className="text-sm">Joined {profileData.joinedDate}</span>
           </div>
         </div>
       </div>
