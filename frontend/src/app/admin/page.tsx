@@ -75,14 +75,14 @@ function AdminDashboard() {
 
           {/* Main Content */}
           <main className="flex-1 min-w-0">
-            {/* Metrics Overview */}
-            <MetricsGrid monthlySales={totalSales} />
-
             {/* Stats Cards */}
             <StatsGrid
               totalProducts={products.length}
               totalSales={totalSales}
             />
+
+            {/* Metrics Widgets */}
+            <MetricsGrid monthlySales={totalSales} />
 
             {/* Products Table */}
             <div className="mb-6">

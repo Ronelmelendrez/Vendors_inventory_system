@@ -435,8 +435,9 @@ function MonthlyMetric({
   const isAboveAverage = currentValue > average;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-green-500/5 to-transparent rounded-full blur-2xl"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-transparent to-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div className="relative">
         <div className="flex items-center justify-between mb-4">
@@ -559,8 +560,9 @@ function TopBranchMetric({
   const rank = getPerformanceRank(performance);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-orange-500/5 to-transparent rounded-full blur-2xl"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div className="relative">
         <div className="flex items-center gap-2 mb-4">
@@ -669,8 +671,9 @@ function LowStockMetric({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full blur-2xl animate-pulse"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-transparent to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div className="relative">
         <div className="flex items-center gap-2 mb-4">
@@ -778,8 +781,9 @@ function CategoryMetric({
   const totalSum = categories.reduce((sum, cat) => sum + cat.value, 0);
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow relative overflow-hidden">
+    <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-md border border-gray-200 p-5 hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
       <div className="absolute top-0 right-0 w-32 h-32 bg-linear-to-br from-purple-500/5 to-transparent rounded-full blur-2xl"></div>
+      <div className="absolute inset-0 bg-linear-to-br from-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
       <div className="relative">
         <div className="flex items-center justify-between mb-4">
@@ -866,39 +870,52 @@ export function MetricsGrid({ monthlySales = 1243 }: MetricsGridProps) {
   );
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-      <MonthlyMetric
-        label="Monthly Sales"
-        value={monthlySales.toLocaleString()}
-        icon={ShoppingCart}
-        color="bg-green-600"
-        monthlyData={monthlySalesData}
-        subtitle="Last 6 months trend"
-      />
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-lg font-bold text-gray-900">Performance Widgets</h2>
+          <p className="text-sm text-gray-500 mt-0.5">Track your key metrics at a glance</p>
+        </div>
+        <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 rounded-full">
+          <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+          <span className="text-xs font-medium text-blue-700">Live Data</span>
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <MonthlyMetric
+          label="Monthly Sales"
+          value={monthlySales.toLocaleString()}
+          icon={ShoppingCart}
+          color="bg-green-600"
+          monthlyData={monthlySalesData}
+          subtitle="Last 6 months trend"
+        />
 
-      <TopBranchMetric
-        label="Top Branch"
-        icon={Building2}
-        branchName={topBranch.name}
-        performance={topBranch.performance}
-        sales={topBranch.sales}
-        color="bg-orange-600"
-      />
+        <TopBranchMetric
+          label="Top Branch"
+          icon={Building2}
+          branchName={topBranch.name}
+          performance={topBranch.performance}
+          sales={topBranch.sales}
+          color="bg-orange-600"
+        />
 
-      <LowStockMetric
-        label="Low Stock Alerts"
-        icon={Boxes}
-        totalLowStock={lowStockItems.length}
-        items={lowStockItems}
-        color="bg-red-600"
-      />
+        <LowStockMetric
+          label="Low Stock Alerts"
+          icon={Boxes}
+          totalLowStock={lowStockItems.length}
+          items={lowStockItems}
+          color="bg-red-600"
+        />
 
-      <CategoryMetric
-        label="Category Sales"
-        icon={Grid3x3}
-        categories={categorySales}
-        totalValue={totalCategorySales.toLocaleString()}
-      />
+        <CategoryMetric
+          label="Category Sales"
+          icon={Grid3x3}
+          categories={categorySales}
+          totalValue={totalCategorySales.toLocaleString()}
+        />
+      </div>
     </div>
   );
 }
