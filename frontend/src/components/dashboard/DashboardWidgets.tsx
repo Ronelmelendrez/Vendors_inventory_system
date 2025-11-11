@@ -1,6 +1,11 @@
 "use client";
 
-import { TrendingUp, TrendingDown, AlertTriangle, Calendar } from "lucide-react";
+import {
+  TrendingUp,
+  TrendingDown,
+  AlertTriangle,
+  Calendar,
+} from "lucide-react";
 
 // ========== TYPES ==========
 interface RecentActivity {
@@ -333,7 +338,9 @@ const defaultLowStockItems: LowStockItem[] = [
   },
 ];
 
-export function LowStockAlerts({ items = defaultLowStockItems }: LowStockAlertsProps) {
+export function LowStockAlerts({
+  items = defaultLowStockItems,
+}: LowStockAlertsProps) {
   return (
     <div className="bg-white rounded-lg border-2 border-orange-100 p-6">
       <div className="flex items-center gap-2 mb-4">
