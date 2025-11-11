@@ -46,18 +46,14 @@ export function ChartStat({
           </span>
         </div>
       </div>
-      
+
       <div className="mb-3">
         <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
           {value}
         </div>
       </div>
 
-      <MiniChart 
-        data={chartData} 
-        color={chartColor}
-        trend={trend}
-      />
+      <MiniChart data={chartData} color={chartColor} trend={trend} />
     </div>
   );
 }

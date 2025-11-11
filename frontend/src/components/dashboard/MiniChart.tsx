@@ -16,23 +16,25 @@ interface MiniChartProps {
   };
 }
 
-export function MiniChart({ 
-  data, 
+export function MiniChart({
+  data,
   color = "rgb(59, 130, 246)", // blue-600
-  trend 
+  trend,
 }: MiniChartProps) {
-  const maxValue = Math.max(...data.map(d => d.value));
-  const minValue = Math.min(...data.map(d => d.value));
+  const maxValue = Math.max(...data.map((d) => d.value));
+  const minValue = Math.min(...data.map((d) => d.value));
   const range = maxValue - minValue || 1;
 
   // Calculate points for the line chart
   const width = 100;
   const height = 40;
-  const points = data.map((point, index) => {
-    const x = (index / (data.length - 1)) * width;
-    const y = height - ((point.value - minValue) / range) * height;
-    return `${x},${y}`;
-  }).join(' ');
+  const points = data
+    .map((point, index) => {
+      const x = (index / (data.length - 1)) * width;
+      const y = height - ((point.value - minValue) / range) * height;
+      return `${x},${y}`;
+    })
+    .join(" ");
 
   // Create area path
   const areaPoints = `0,${height} ${points} ${width},${height}`;
@@ -45,11 +47,7 @@ export function MiniChart({
         preserveAspectRatio="none"
       >
         {/* Area fill */}
-        <polygon
-          points={areaPoints}
-          fill={color}
-          opacity="0.1"
-        />
+        <polygon points={areaPoints} fill={color} opacity="0.1" />
         {/* Line */}
         <polyline
           points={points}
@@ -76,9 +74,13 @@ export function MiniChart({
         })}
       </svg>
       {trend && (
-        <div className={`absolute top-0 right-0 flex items-center gap-1 text-xs font-medium ${
-          trend.isPositive ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
-        }`}>
+        <div
+          className={`absolute top-0 right-0 flex items-center gap-1 text-xs font-medium ${
+            trend.isPositive
+              ? "text-green-600 dark:text-green-400"
+              : "text-red-600 dark:text-red-400"
+          }`}
+        >
           {trend.isPositive ? (
             <TrendingUp className="h-3 w-3" />
           ) : (
