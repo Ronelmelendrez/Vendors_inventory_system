@@ -8,9 +8,7 @@ interface MetricsGridProps {
   monthlySales?: number;
 }
 
-export function MetricsGrid({
-  monthlySales = 1243,
-}: MetricsGridProps) {
+export function MetricsGrid({ monthlySales = 1243 }: MetricsGridProps) {
   // Monthly sales data (last 6 months)
   const monthlySalesData = [
     { month: "Jun", value: 892 },
@@ -44,7 +42,10 @@ export function MetricsGrid({
     { label: "Books", value: 158, color: "rgb(234, 88, 12)" }, // orange
   ];
 
-  const totalCategorySales = categorySales.reduce((sum, cat) => sum + cat.value, 0);
+  const totalCategorySales = categorySales.reduce(
+    (sum, cat) => sum + cat.value,
+    0
+  );
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

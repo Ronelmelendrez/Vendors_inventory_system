@@ -9,20 +9,23 @@ interface BarChartProps {
   animated?: boolean;
 }
 
-export function MiniBarChart({ 
-  data, 
+export function MiniBarChart({
+  data,
   height = 60,
   showValues = true,
-  animated = true
+  animated = true,
 }: BarChartProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const maxValue = Math.max(...data.map(d => d.value));
+  const maxValue = Math.max(...data.map((d) => d.value));
   const totalValue = data.reduce((sum, item) => sum + item.value, 0);
 
   return (
     <div className="w-full space-y-2">
       {/* Bar chart */}
-      <div style={{ height: `${height}px` }} className="flex items-end justify-between gap-1.5">
+      <div
+        style={{ height: `${height}px` }}
+        className="flex items-end justify-between gap-1.5"
+      >
         {data.map((item, index) => {
           const barHeight = (item.value / maxValue) * height;
           const isHovered = hoveredIndex === index;
@@ -42,19 +45,19 @@ export function MiniBarChart({
                   <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
                 </div>
               )}
-              
+
               {/* Bar */}
               <div className="relative w-full flex flex-col items-center">
                 <div
                   className={`w-full rounded-t transition-all duration-500 relative overflow-hidden ${
-                    isHovered ? 'opacity-100' : 'opacity-90'
+                    isHovered ? "opacity-100" : "opacity-90"
                   }`}
                   style={{
                     height: animated ? `${barHeight}px` : `${barHeight}px`,
-                    backgroundColor: item.color || 'rgb(59, 130, 246)',
-                    transform: isHovered ? 'scaleY(1.05)' : 'scaleY(1)',
-                    transformOrigin: 'bottom',
-                    boxShadow: isHovered ? `0 0 8px ${item.color}40` : 'none'
+                    backgroundColor: item.color || "rgb(59, 130, 246)",
+                    transform: isHovered ? "scaleY(1.05)" : "scaleY(1)",
+                    transformOrigin: "bottom",
+                    boxShadow: isHovered ? `0 0 8px ${item.color}40` : "none",
                   }}
                 >
                   {/* Shine effect */}
@@ -80,7 +83,10 @@ export function MiniBarChart({
       {/* Legend with percentages */}
       <div className="grid grid-cols-1 gap-1 mt-2">
         {data.map((item, index) => (
-          <div key={index} className="flex items-center justify-between text-xs">
+          <div
+            key={index}
+            className="flex items-center justify-between text-xs"
+          >
             <div className="flex items-center gap-1.5">
               <div
                 className="w-2.5 h-2.5 rounded-sm"

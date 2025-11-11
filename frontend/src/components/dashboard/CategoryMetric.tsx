@@ -17,8 +17,9 @@ export function CategoryMetric({
   totalValue,
 }: CategoryMetricProps) {
   // Find top performing category
-  const topCategory = categories.reduce((max, cat) => 
-    cat.value > max.value ? cat : max, categories[0]
+  const topCategory = categories.reduce(
+    (max, cat) => (cat.value > max.value ? cat : max),
+    categories[0]
   );
 
   const totalSum = categories.reduce((sum, cat) => sum + cat.value, 0);
@@ -27,7 +28,7 @@ export function CategoryMetric({
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 hover:shadow-md transition-shadow relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/5 to-transparent rounded-full blur-2xl"></div>
-      
+
       <div className="relative">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -40,7 +41,7 @@ export function CategoryMetric({
           </div>
           <BarChart3 className="h-4 w-4 text-purple-600 dark:text-purple-400" />
         </div>
-        
+
         {/* Total value and top category */}
         <div className="mb-4 space-y-2">
           {totalValue && (
@@ -53,7 +54,8 @@ export function CategoryMetric({
             <span className="text-gray-600 dark:text-gray-400">
               <span className="font-semibold text-gray-900 dark:text-gray-100">
                 {topCategory.label}
-              </span> leading with{" "}
+              </span>{" "}
+              leading with{" "}
               <span className="font-semibold text-gray-900 dark:text-gray-100">
                 {((topCategory.value / totalSum) * 100).toFixed(1)}%
               </span>
@@ -62,8 +64,8 @@ export function CategoryMetric({
         </div>
 
         {/* Bar chart */}
-        <MiniBarChart 
-          data={categories} 
+        <MiniBarChart
+          data={categories}
           height={50}
           showValues={true}
           animated={true}

@@ -32,20 +32,22 @@ export function MonthlyMetric({
   // Calculate trend
   const currentValue = monthlyData[monthlyData.length - 1]?.value || 0;
   const previousValue = monthlyData[monthlyData.length - 2]?.value || 0;
-  const trend = previousValue > 0 
-    ? ((currentValue - previousValue) / previousValue) * 100 
-    : 0;
+  const trend =
+    previousValue > 0
+      ? ((currentValue - previousValue) / previousValue) * 100
+      : 0;
   const isPositiveTrend = trend >= 0;
 
   // Calculate average
-  const average = monthlyData.reduce((sum, d) => sum + d.value, 0) / monthlyData.length;
+  const average =
+    monthlyData.reduce((sum, d) => sum + d.value, 0) / monthlyData.length;
   const isAboveAverage = currentValue > average;
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border dark:border-gray-700 p-4 hover:shadow-md transition-shadow relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/5 to-transparent rounded-full blur-2xl"></div>
-      
+
       <div className="relative">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -57,13 +59,15 @@ export function MonthlyMetric({
                 {label}
               </span>
               {subtitle && (
-                <span className="text-xs text-gray-500 dark:text-gray-500">{subtitle}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-500">
+                  {subtitle}
+                </span>
               )}
             </div>
           </div>
           <Calendar className="h-4 w-4 text-gray-400 dark:text-gray-500" />
         </div>
-        
+
         {/* Value and trend */}
         <div className="mb-4 space-y-2">
           <div className="flex items-baseline gap-2">
@@ -71,11 +75,13 @@ export function MonthlyMetric({
               {value}
             </div>
             {trend !== 0 && (
-              <div className={`flex items-center gap-1 text-sm font-semibold ${
-                isPositiveTrend 
-                  ? 'text-green-600 dark:text-green-400' 
-                  : 'text-red-600 dark:text-red-400'
-              }`}>
+              <div
+                className={`flex items-center gap-1 text-sm font-semibold ${
+                  isPositiveTrend
+                    ? "text-green-600 dark:text-green-400"
+                    : "text-red-600 dark:text-red-400"
+                }`}
+              >
                 {isPositiveTrend ? (
                   <TrendingUp className="h-3.5 w-3.5" />
                 ) : (
@@ -85,31 +91,33 @@ export function MonthlyMetric({
               </div>
             )}
           </div>
-          
+
           {/* Average indicator */}
           <div className="flex items-center gap-2 text-xs">
             <span className="text-gray-500 dark:text-gray-400">
               Avg: {average.toFixed(0)}
             </span>
-            <span className={`font-semibold ${
-              isAboveAverage 
-                ? 'text-green-600 dark:text-green-400' 
-                : 'text-gray-600 dark:text-gray-400'
-            }`}>
-              {isAboveAverage ? '↑ Above average' : '↓ Below average'}
+            <span
+              className={`font-semibold ${
+                isAboveAverage
+                  ? "text-green-600 dark:text-green-400"
+                  : "text-gray-600 dark:text-gray-400"
+              }`}
+            >
+              {isAboveAverage ? "↑ Above average" : "↓ Below average"}
             </span>
           </div>
         </div>
 
         {/* Area chart */}
-        <AreaChart 
-          data={monthlyData} 
+        <AreaChart
+          data={monthlyData}
           color={chartColor}
           showGrid={true}
           height={60}
           showTooltip={true}
         />
-        
+
         {/* Month range */}
         <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
           <span>{monthlyData[0]?.month}</span>

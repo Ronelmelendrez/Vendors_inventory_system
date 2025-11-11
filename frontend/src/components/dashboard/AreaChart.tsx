@@ -15,33 +15,38 @@ interface AreaChartProps {
   showTooltip?: boolean;
 }
 
-export function AreaChart({ 
-  data, 
+export function AreaChart({
+  data,
   color = "rgb(34, 197, 94)", // green-600
   showGrid = true,
   height = 60,
-  showTooltip = true
+  showTooltip = true,
 }: AreaChartProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
-  const maxValue = Math.max(...data.map(d => d.value));
-  const minValue = Math.min(...data.map(d => d.value));
+
+  const maxValue = Math.max(...data.map((d) => d.value));
+  const minValue = Math.min(...data.map((d) => d.value));
   const range = maxValue - minValue || 1;
 
   const width = 120;
   const padding = 8;
 
   // Calculate points for the line
-  const points = data.map((point, index) => {
-    const x = padding + (index / (data.length - 1)) * (width - padding * 2);
-    const y = height - padding - ((point.value - minValue) / range) * (height - padding * 2);
-    return `${x},${y}`;
-  }).join(' ');
+  const points = data
+    .map((point, index) => {
+      const x = padding + (index / (data.length - 1)) * (width - padding * 2);
+      const y =
+        height -
+        padding -
+        ((point.value - minValue) / range) * (height - padding * 2);
+      return `${x},${y}`;
+    })
+    .join(" ");
 
   // Create smooth path for area
   const areaPath = `
     M ${padding},${height - padding}
-    L ${points.split(' ')[0]}
+    L ${points.split(" ")[0]}
     L ${points}
     L ${width - padding},${height - padding}
     Z
@@ -72,20 +77,29 @@ export function AreaChart({
             ))}
           </g>
         )}
-        
+
         {/* Gradient definition */}
         <defs>
-          <linearGradient id={`areaGradient-${color.replace(/[^a-z0-9]/gi, '')}`} x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient
+            id={`areaGradient-${color.replace(/[^a-z0-9]/gi, "")}`}
+            x1="0%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
             <stop offset="0%" style={{ stopColor: color, stopOpacity: 0.4 }} />
             <stop offset="50%" style={{ stopColor: color, stopOpacity: 0.2 }} />
-            <stop offset="100%" style={{ stopColor: color, stopOpacity: 0.05 }} />
+            <stop
+              offset="100%"
+              style={{ stopColor: color, stopOpacity: 0.05 }}
+            />
           </linearGradient>
         </defs>
 
         {/* Area fill */}
         <path
           d={areaPath}
-          fill={`url(#areaGradient-${color.replace(/[^a-z0-9]/gi, '')})`}
+          fill={`url(#areaGradient-${color.replace(/[^a-z0-9]/gi, "")})`}
         />
 
         {/* Line */}
@@ -100,10 +114,14 @@ export function AreaChart({
 
         {/* Interactive points */}
         {data.map((point, index) => {
-          const x = padding + (index / (data.length - 1)) * (width - padding * 2);
-          const y = height - padding - ((point.value - minValue) / range) * (height - padding * 2);
+          const x =
+            padding + (index / (data.length - 1)) * (width - padding * 2);
+          const y =
+            height -
+            padding -
+            ((point.value - minValue) / range) * (height - padding * 2);
           const isHovered = hoveredIndex === index;
-          
+
           return (
             <g key={index}>
               {/* Hover area */}
@@ -115,7 +133,7 @@ export function AreaChart({
                 fill="transparent"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               />
               {/* Data point */}
               <circle
@@ -144,7 +162,7 @@ export function AreaChart({
                     y={y - 22}
                     textAnchor="middle"
                     className="text-xs font-semibold fill-white"
-                    style={{ fontSize: '10px' }}
+                    style={{ fontSize: "10px" }}
                   >
                     {point.value.toLocaleString()}
                   </text>
@@ -153,7 +171,7 @@ export function AreaChart({
                     y={y - 13}
                     textAnchor="middle"
                     className="text-xs fill-gray-300"
-                    style={{ fontSize: '8px' }}
+                    style={{ fontSize: "8px" }}
                   >
                     {point.month}
                   </text>

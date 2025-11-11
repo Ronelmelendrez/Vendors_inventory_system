@@ -12,17 +12,19 @@ interface ProgressRingProps {
   showGlow?: boolean;
 }
 
-export function ProgressRing({ 
-  percentage, 
-  size = 70, 
+export function ProgressRing({
+  percentage,
+  size = 70,
   strokeWidth = 8,
   color = "rgb(234, 88, 12)", // orange-600
   label,
   animated = true,
-  showGlow = true
+  showGlow = true,
 }: ProgressRingProps) {
-  const [currentPercentage, setCurrentPercentage] = useState(animated ? 0 : percentage);
-  
+  const [currentPercentage, setCurrentPercentage] = useState(
+    animated ? 0 : percentage
+  );
+
   useEffect(() => {
     if (animated) {
       const timer = setTimeout(() => {
@@ -54,15 +56,15 @@ export function ProgressRing({
           {showGlow && (
             <defs>
               <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
                 <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
           )}
-          
+
           {/* Background circle */}
           <circle
             cx={size / 2}
@@ -74,7 +76,7 @@ export function ProgressRing({
             className="text-gray-200 dark:text-gray-700"
             opacity="0.3"
           />
-          
+
           {/* Progress circle */}
           <circle
             cx={size / 2}
@@ -89,11 +91,13 @@ export function ProgressRing({
             className="transition-all duration-1000 ease-out"
             filter={showGlow ? "url(#glow)" : undefined}
             style={{
-              filter: showGlow ? `drop-shadow(0 0 4px ${ringColor})` : undefined
+              filter: showGlow
+                ? `drop-shadow(0 0 4px ${ringColor})`
+                : undefined,
             }}
           />
         </svg>
-        
+
         {/* Center content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-xl font-bold text-gray-900 dark:text-gray-100">
