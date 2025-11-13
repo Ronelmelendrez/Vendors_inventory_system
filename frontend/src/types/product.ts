@@ -5,6 +5,7 @@ export interface Product {
   size: string;
   type: string;
   category: string;
+  branch_name?: string;
 }
 
 export interface ProductFormData {
