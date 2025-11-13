@@ -7,7 +7,6 @@ import {
   QuickActions,
   MobileQuickActions,
   WelcomeSection,
-  MetricsGrid,
   ActivityFeed,
   TopProducts,
   SalesChart,
@@ -80,9 +79,6 @@ function AdminDashboard() {
               totalProducts={products.length}
               totalSales={totalSales}
             />
-
-            {/* Metrics Widgets */}
-            <MetricsGrid monthlySales={totalSales} />
 
             {/* Products Table */}
             <div className="mb-6">

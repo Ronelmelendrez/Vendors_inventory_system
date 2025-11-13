@@ -4,7 +4,6 @@ export { QuickActions } from "./QuickActions";
 export { MobileQuickActions } from "./MobileQuickActions";
 export { WelcomeSection } from "./WelcomeSection";
 export { QuickStat } from "./QuickStat";
-export { MetricsGrid } from "./MetricsGrid";
 
 // Dashboard Widgets (consolidated)
 export {
