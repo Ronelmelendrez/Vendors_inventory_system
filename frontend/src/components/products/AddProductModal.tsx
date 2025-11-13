@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Plus, Building2 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { ProductFormData, PRODUCT_CATEGORIES } from "@/types/product";
 
@@ -22,6 +22,24 @@ export function AddProductModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Add New Product">
       <form onSubmit={onSubmit} className="space-y-4">
+        {formData.branch_name && (
+          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                <Building2 className="h-4 w-4 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-xs font-medium text-blue-900">
+                  Adding to Branch
+                </p>
+                <p className="text-sm font-bold text-blue-700">
+                  {formData.branch_name}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div>
           <label className="block text-sm font-bold text-gray-900 mb-1">
             Product Name *

@@ -27,6 +27,7 @@ function AdminDashboard() {
     totalSales,
     setIsModalOpen,
     handleInputChange,
+    setBranchName,
     handleAddProduct,
     handleEditProduct,
     handleDeleteProduct,
@@ -69,6 +70,7 @@ function AdminDashboard() {
             <QuickActions
               onAddProduct={() => setIsModalOpen(true)}
               onRecordSale={() => setIsSaleModalOpen(true)}
+              onBranchSelect={setBranchName}
             />
           </div>
 

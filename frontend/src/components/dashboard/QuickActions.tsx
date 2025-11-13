@@ -15,6 +15,7 @@ import { useState } from "react";
 interface QuickActionsProps {
   onAddProduct: () => void;
   onRecordSale?: () => void;
+  onBranchSelect?: (branchName: string) => void;
 }
 
 interface ActionItemProps {
@@ -69,6 +70,7 @@ function ActionItem({
 export function QuickActions({
   onAddProduct,
   onRecordSale,
+  onBranchSelect,
 }: QuickActionsProps) {
   const [showBranchSelection, setShowBranchSelection] = useState(false);
 
@@ -82,6 +84,9 @@ export function QuickActions({
   const handleBranchSelect = (branchId: number, branchName: string) => {
     console.log(`Selected branch: ${branchName} (ID: ${branchId})`);
     setShowBranchSelection(false);
+    if (onBranchSelect) {
+      onBranchSelect(branchName);
+    }
     onAddProduct();
   };
 

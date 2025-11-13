@@ -16,7 +16,7 @@ export function ProductsTable({
   // Group products by branch
   const productsByBranch = useMemo(() => {
     const grouped: Record<string, Product[]> = {};
-    
+
     products.forEach((product) => {
       const branchName = product.branch_name || "Unknown Branch";
       if (!grouped[branchName]) {
@@ -24,7 +24,7 @@ export function ProductsTable({
       }
       grouped[branchName].push(product);
     });
-    
+
     return grouped;
   }, [products]);
 
@@ -46,7 +46,8 @@ export function ProductsTable({
               <div>
                 <h2 className="text-lg font-bold text-white">{branchName}</h2>
                 <p className="text-sm text-blue-100">
-                  {branchProducts.length} {branchProducts.length === 1 ? 'product' : 'products'}
+                  {branchProducts.length}{" "}
+                  {branchProducts.length === 1 ? "product" : "products"}
                 </p>
               </div>
             </div>

@@ -14,6 +14,7 @@ export interface ProductFormData {
   size: string;
   type: string;
   category: string;
+  branch_name?: string;
 }
 
 export const PRODUCT_CATEGORIES = [

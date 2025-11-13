@@ -7,6 +7,7 @@ const initialFormData: ProductFormData = {
   size: "",
   type: "",
   category: "",
+  branch_name: "",
 };
 
 export function useProducts() {
@@ -21,6 +22,10 @@ export function useProducts() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const setBranchName = (branchName: string) => {
+    setFormData((prev) => ({ ...prev, branch_name: branchName }));
+  };
+
   const handleAddProduct = (e: React.FormEvent) => {
     e.preventDefault();
     const newProduct: Product = {
@@ -30,6 +35,7 @@ export function useProducts() {
       size: formData.size,
       type: formData.type,
       category: formData.category,
+      branch_name: formData.branch_name,
     };
     setProducts((prev) => [...prev, newProduct]);
     setFormData(initialFormData);
@@ -57,6 +63,7 @@ export function useProducts() {
     totalSales,
     setIsModalOpen,
     handleInputChange,
+    setBranchName,
     handleAddProduct,
     handleEditProduct,
     handleDeleteProduct,
