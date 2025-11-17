@@ -5,7 +5,10 @@ import {
   TrendingDown,
   AlertTriangle,
   Calendar,
+  Plus,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 
 // ========== TYPES ==========
 interface RecentActivity {
@@ -267,38 +270,155 @@ const defaultEvents: SaleEvent[] = [
 ];
 
 export function SalesCalendar({ events = defaultEvents }: SalesCalendarProps) {
+  const [eventsList, setEventsList] = useState<SaleEvent[]>(events);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    date: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newEvent: SaleEvent = {
+      id: Date.now(),
+      title: formData.title,
+      date: new Date(formData.date).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
+      type: "upcoming",
+    };
+    setEventsList((prev) => [...prev, newEvent]);
+    setFormData({ title: "", date: "" });
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="bg-white rounded-lg border-2 border-gray-100 p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Calendar className="h-5 w-5 text-blue-600" />
-        <h3 className="text-lg font-bold text-gray-900">Upcoming Events</h3>
-      </div>
-      <div className="space-y-3">
-        {events.map((event) => (
-          <div
-            key={event.id}
-            className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors"
-          >
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex flex-col items-center justify-center shrink-0">
-              <span className="text-xs font-semibold text-blue-600">
-                {new Date(event.date).toLocaleDateString("en-US", {
-                  month: "short",
-                })}
-              </span>
-              <span className="text-lg font-bold text-blue-600">
-                {new Date(event.date).getDate()}
-              </span>
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-gray-900">
-                {event.title}
-              </p>
-              <p className="text-xs text-gray-500">{event.date}</p>
-            </div>
+    <>
+      <div className="bg-white rounded-lg border-2 border-gray-100 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Calendar className="h-5 w-5 text-blue-600" />
+            <h3 className="text-lg font-bold text-gray-900">Upcoming Events</h3>
           </div>
-        ))}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            <Plus className="h-4 w-4" />
+            Add Event
+          </button>
+        </div>
+        <div className="space-y-3">
+          {eventsList.map((event) => (
+            <div
+              key={event.id}
+              className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex flex-col items-center justify-center shrink-0">
+                <span className="text-xs font-semibold text-blue-600">
+                  {new Date(event.date).toLocaleDateString("en-US", {
+                    month: "short",
+                  })}
+                </span>
+                <span className="text-lg font-bold text-blue-600">
+                  {new Date(event.date).getDate()}
+                </span>
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-gray-900">
+                  {event.title}
+                </p>
+                <p className="text-xs text-gray-500">{event.date}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Add Event Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <Calendar className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900">
+                    Add New Event
+                  </h3>
+                  <p className="text-sm text-gray-500">Schedule an upcoming event</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="h-5 w-5 text-gray-400" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-1">
+                  Event Title *
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-3 py-3 text-gray-900 font-medium bg-white border-2 border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-600"
+                  placeholder="Enter event title"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-gray-900 mb-1">
+                  Event Date *
+                </label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-3 py-3 text-gray-900 font-medium bg-white border-2 border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setIsModalOpen(false)}
+                  className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+                >
+                  <Plus className="h-5 w-5" />
+                  Add Event
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
