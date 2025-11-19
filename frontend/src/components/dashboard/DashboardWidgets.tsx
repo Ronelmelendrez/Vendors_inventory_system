@@ -356,7 +356,9 @@ export function SalesCalendar({ events = defaultEvents }: SalesCalendarProps) {
                   <h3 className="text-lg font-bold text-gray-900">
                     Add New Event
                   </h3>
-                  <p className="text-sm text-gray-500">Schedule an upcoming event</p>
+                  <p className="text-sm text-gray-500">
+                    Schedule an upcoming event
+                  </p>
                 </div>
               </div>
               <button

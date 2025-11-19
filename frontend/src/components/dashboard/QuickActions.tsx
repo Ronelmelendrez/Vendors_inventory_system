@@ -134,7 +134,7 @@ export function QuickActions({
           />
           <ActionItem
             icon={<RotateCcw className="h-5 w-5" />}
-            text="Record Return"
+            text="Inventory"
             onClick={() => {}}
             color="orange"
             badge="Soon"
