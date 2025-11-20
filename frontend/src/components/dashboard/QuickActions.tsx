@@ -10,6 +10,8 @@ import {
   Building2,
   X,
   Warehouse,
+  BarChart3,
+  TrendingUp,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -75,6 +77,7 @@ export function QuickActions({
 }: QuickActionsProps) {
   const [showBranchSelection, setShowBranchSelection] = useState(false);
   const [showInventory, setShowInventory] = useState(false);
+  const [showReports, setShowReports] = useState(false);
 
   const branches = [
     { id: 1, name: "Main Branch", location: "Downtown" },
@@ -143,9 +146,8 @@ export function QuickActions({
           <ActionItem
             icon={<FileText className="h-5 w-5" />}
             text="View Reports"
-            onClick={() => {}}
+            onClick={() => setShowReports(true)}
             color="purple"
-            badge="Soon"
           />
         </nav>
 
@@ -372,6 +374,186 @@ export function QuickActions({
                 >
                   Close
                 </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Reports Modal */}
+        {showReports && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-linear-to-r from-purple-600 to-pink-600">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                    <BarChart3 className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">
+                      Business Reports
+                    </h3>
+                    <p className="text-sm text-purple-100">
+                      Comprehensive analytics and performance metrics
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowReports(false)}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <X className="h-5 w-5 text-white" />
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+                {/* Summary Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                  <div className="bg-linear-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Package className="h-5 w-5 text-blue-600" />
+                      <p className="text-xs font-semibold text-blue-900 uppercase">Total Products</p>
+                    </div>
+                    <p className="text-2xl font-bold text-blue-900">0</p>
+                    <p className="text-xs text-blue-600 mt-1">Across all branches</p>
+                  </div>
+                  <div className="bg-linear-to-br from-green-50 to-green-100 border-2 border-green-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <TrendingUp className="h-5 w-5 text-green-600" />
+                      <p className="text-xs font-semibold text-green-900 uppercase">Total Sales</p>
+                    </div>
+                    <p className="text-2xl font-bold text-green-900">$0.00</p>
+                    <p className="text-xs text-green-600 mt-1">This month</p>
+                  </div>
+                  <div className="bg-linear-to-br from-orange-50 to-orange-100 border-2 border-orange-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Warehouse className="h-5 w-5 text-orange-600" />
+                      <p className="text-xs font-semibold text-orange-900 uppercase">Total Stock</p>
+                    </div>
+                    <p className="text-2xl font-bold text-orange-900">0</p>
+                    <p className="text-xs text-orange-600 mt-1">Units available</p>
+                  </div>
+                  <div className="bg-linear-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Building2 className="h-5 w-5 text-purple-600" />
+                      <p className="text-xs font-semibold text-purple-900 uppercase">Active Branches</p>
+                    </div>
+                    <p className="text-2xl font-bold text-purple-900">{branches.length}</p>
+                    <p className="text-xs text-purple-600 mt-1">Operating locations</p>
+                  </div>
+                </div>
+
+                {/* Branch Performance */}
+                <div className="bg-white rounded-lg border-2 border-gray-200 overflow-hidden mb-6">
+                  <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                    <h4 className="font-bold text-gray-900">Branch Performance</h4>
+                    <p className="text-xs text-gray-500">Sales and inventory by location</p>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead className="bg-gray-50 border-b">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Branch</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Products</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Stock</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sales (MTD)</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Performance</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-200">
+                        {branches.map((branch) => (
+                          <tr key={branch.id} className="hover:bg-gray-50">
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                  <Building2 className="h-4 w-4 text-purple-600" />
+                                </div>
+                                <div>
+                                  <p className="text-sm font-semibold text-gray-900">{branch.name}</p>
+                                  <p className="text-xs text-gray-500">{branch.location}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-4 py-3 text-sm font-semibold text-gray-900">0</td>
+                            <td className="px-4 py-3 text-sm font-semibold text-gray-900">0 units</td>
+                            <td className="px-4 py-3 text-sm font-semibold text-green-600">$0.00</td>
+                            <td className="px-4 py-3">
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div className="bg-purple-600 h-2 rounded-full" style={{ width: '0%' }}></div>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                {/* Sales Analytics */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Top Products */}
+                  <div className="bg-white rounded-lg border-2 border-gray-200 overflow-hidden">
+                    <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                      <h4 className="font-bold text-gray-900">Top Selling Products</h4>
+                      <p className="text-xs text-gray-500">Best performers this month</p>
+                    </div>
+                    <div className="p-4">
+                      <div className="text-center py-8 text-gray-500">
+                        <Package className="h-12 w-12 mx-auto mb-2 text-gray-300" />
+                        <p className="text-sm">No sales data available</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Inventory Status */}
+                  <div className="bg-white rounded-lg border-2 border-gray-200 overflow-hidden">
+                    <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                      <h4 className="font-bold text-gray-900">Inventory Status</h4>
+                      <p className="text-xs text-gray-500">Stock levels and alerts</p>
+                    </div>
+                    <div className="p-4">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                          <div>
+                            <p className="text-sm font-semibold text-green-900">In Stock</p>
+                            <p className="text-xs text-green-600">Items with sufficient quantity</p>
+                          </div>
+                          <p className="text-2xl font-bold text-green-600">0</p>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                          <div>
+                            <p className="text-sm font-semibold text-orange-900">Low Stock</p>
+                            <p className="text-xs text-orange-600">Items needing restock</p>
+                          </div>
+                          <p className="text-2xl font-bold text-orange-600">0</p>
+                        </div>
+                        <div className="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                          <div>
+                            <p className="text-sm font-semibold text-red-900">Out of Stock</p>
+                            <p className="text-xs text-red-600">Items unavailable</p>
+                          </div>
+                          <p className="text-2xl font-bold text-red-600">0</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
+                <div className="text-sm text-gray-600">
+                  <span className="font-semibold">Generated:</span> {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowReports(false)}
+                    className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors font-medium"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </div>
