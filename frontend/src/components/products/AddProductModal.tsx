@@ -122,6 +122,23 @@ export function AddProductModal({
           </select>
         </div>
 
+        <div>
+          <label className="block text-sm font-bold text-gray-900 mb-1">
+            Stock Quantity *
+          </label>
+          <input
+            type="number"
+            name="stock"
+            value={formData.stock}
+            onChange={onInputChange}
+            required
+            min="0"
+            step="1"
+            className="w-full px-3 py-3 text-gray-900 font-medium bg-white border-2 border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder:text-gray-600"
+            placeholder="Enter stock quantity"
+          />
+        </div>
+
         <div className="flex gap-3 pt-4">
           <button
             type="button"

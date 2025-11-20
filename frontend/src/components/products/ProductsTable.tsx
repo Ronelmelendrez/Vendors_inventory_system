@@ -66,6 +66,9 @@ export function ProductsTable({
                       Price
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Stock
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                       Size
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
@@ -87,6 +90,9 @@ export function ProductsTable({
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-900">
                         ${product.price.toFixed(2)}
+                      </td>
+                      <td className="px-4 py-3 text-sm font-semibold text-gray-900">
+                        {product.stock ?? 0} units
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-900">
                         {product.size}

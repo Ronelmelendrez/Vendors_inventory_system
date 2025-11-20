@@ -6,6 +6,7 @@ export interface Product {
   type: string;
   category: string;
   branch_name?: string;
+  stock?: number;
 }
 
 export interface ProductFormData {
@@ -15,6 +16,7 @@ export interface ProductFormData {
   type: string;
   category: string;
   branch_name?: string;
+  stock?: string;
 }
 
 export const PRODUCT_CATEGORIES = [

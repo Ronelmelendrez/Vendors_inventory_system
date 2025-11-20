@@ -8,6 +8,7 @@ const initialFormData: ProductFormData = {
   type: "",
   category: "",
   branch_name: "",
+  stock: "",
 };
 
 export function useProducts() {
@@ -36,6 +37,7 @@ export function useProducts() {
       type: formData.type,
       category: formData.category,
       branch_name: formData.branch_name,
+      stock: formData.stock ? parseInt(formData.stock) : 0,
     };
     setProducts((prev) => [...prev, newProduct]);
     setFormData(initialFormData);
